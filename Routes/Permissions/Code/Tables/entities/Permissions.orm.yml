@@ -1,0 +1,83 @@
+System\Routes\Permissions\Code\Tables\Permissions:
+  table: system_routes_permissions
+  type: entity
+  id:
+    id:
+      type: integer
+      generator: { strategy: AUTO }
+  fields:
+    role_id:
+      name: role_id
+      type: integer
+      length: 11
+      nullable: false
+    route_id:
+      name: route_id
+      type: integer
+      length: 11
+      nullable: false
+    can_add:
+      name: can_add
+      type: integer
+      length: 11
+      nullable: true
+    can_view:
+      name: can_view
+      type: integer
+      length: 11
+      nullable: true
+    can_write:
+      name: can_write
+      type: integer
+      length: 11
+      nullable: true
+    can_delete:
+      name: can_delete
+      type: integer
+      length: 11
+      nullable: true
+    can_viewown:
+      name: can_viewown
+      type: integer
+      length: 11
+      nullable: true
+    can_writeown:
+      name: can_writeown
+      type: integer
+      length: 11
+      nullable: true
+    can_deleteown:
+      name: can_deleteown
+      type: integer
+      length: 11
+      nullable: true
+    created_by:
+      name: created_by
+      type: integer
+      length: 11
+      nullable: false
+    date_created:
+      name: date_created
+      type: datetime
+      nullable: false
+    modified_by:
+      name: modified_by
+      type: integer
+      length: 11
+      nullable: false
+    date_modified:
+      name: date_modified
+      type: datetime
+      nullable: false
+  indexes:
+    role_id_index:
+      columns: [role_id]
+    route_id_index:
+      columns: [route_id]
+  lifecycleCallbacks:
+    prePersist:
+      - onPrePersist
+      - onPrePersistCallbacks
+    preUpdate:
+      - onPreUpdate
+      - onPreUpdateCallbacks

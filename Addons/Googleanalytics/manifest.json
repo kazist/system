@@ -1,0 +1,10 @@
+{
+    "name": "googleanalytics",
+    "title": "Googleanalytics Listing",
+    "explanation": "Googleanalytics Listing",
+    "description": "Googleanalytics Listing",
+    "version": 1,
+    "icon": "assets\/system\/addons\/googleanalytics\/icon.png",
+    "extension": "addon",
+    "path": "system\/addons\/googleanalytics\/"
+}

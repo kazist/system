@@ -1,0 +1,40 @@
+{# empty Twig template #}
+{% import "form.macro.twig" as forms %}
+
+{{ set_assets('applications/Cms/assets/css/article.css') }}
+
+{% set path_set = addTwigPath( "applications.System.generalviews") %}
+
+<div class="cms-content">
+    <h1 class="component-header">{{ item.title }} </h1>
+
+    {% if item.image %}
+        <div class="img-wrapper text-center">
+            <img src="{{ resized_image(item.article_image.file, null, 300, 'fit') }}" alt="{{ item.title }}" title="{{ item.title }}">
+        </div> 
+    {% endif %}
+
+    {{ item.content|raw }}
+
+    {% if addthis_enable %}
+        {{ include('cms.addthis.twig') }} 
+    {% endif %}
+
+    {% if rate_enable %}
+        {{ include('user.rate.twig') }} 
+    {% endif %}
+
+    {% if survey_enable %}
+        {{ include('cms.survey.twig') }} 
+    {% endif %}
+
+    {% if disqus_enable %}
+        {{ include('cms.disqus.twig') }} 
+    {% endif %}
+
+    {{ forms.input('id', 'hidden', item.id) }}
+
+    <div class="clearfix"></div>
+</div>
+
+

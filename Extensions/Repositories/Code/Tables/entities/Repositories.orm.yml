@@ -1,0 +1,52 @@
+System\Extensions\Repositories\Code\Tables\Repositories:
+  table: system_extensions_repositories
+  type: entity
+  id:
+    id:
+      type: integer
+      generator: { strategy: AUTO }
+  fields:
+    title:
+      name: title
+      type: string
+      length: 255
+      nullable: false
+    url:
+      name: url
+      type: string
+      length: 255
+      nullable: false
+    token:
+      name: token
+      type: string
+      length: 255
+      nullable: false
+    description:
+      name: description
+      type: text
+      nullable: false
+    created_by:
+      name: created_by
+      type: integer
+      length: 11
+      nullable: true
+    date_created:
+      name: date_created
+      type: datetime
+      nullable: true
+    modified_by:
+      name: modified_by
+      type: integer
+      length: 11
+      nullable: true
+    date_modified:
+      name: date_modified
+      type: datetime
+      nullable: true
+  lifecycleCallbacks:
+    prePersist:
+      - onPrePersist
+      - onPrePersistCallbacks
+    preUpdate:
+      - onPreUpdate
+      - onPreUpdateCallbacks

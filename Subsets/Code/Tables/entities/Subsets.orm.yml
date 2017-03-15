@@ -1,0 +1,86 @@
+System\Subsets\Code\Tables\Subsets:
+  table: system_subsets
+  type: entity
+  id:
+    id:
+      type: integer
+      generator: { strategy: AUTO }
+  fields:
+    extension_id:
+      name: extension_id
+      type: integer
+      length: '11'
+      nullable: false
+    name:
+      name: name
+      type: string
+      length: '255'
+      nullable: false
+    title:
+      name: title
+      type: string
+      length: 255
+      nullable: false
+    version:
+      name: version
+      type: integer
+      length: '11'
+      nullable: true
+    has_view:
+      name: has_view
+      type: integer
+      length: '11'
+      nullable: true
+    explanation:
+      name: explanation
+      type: string
+      length: '255'
+      nullable: true
+    description:
+      name: description
+      type: string
+      length: '255'
+      nullable: true
+    is_processed:
+      name: is_processed
+      type: integer
+      length: 11
+      nullable: true
+    offset:
+      name: offset
+      type: integer
+      length: 11
+      nullable: true
+    path:
+      name: path
+      type: string
+      length: 255
+      nullable: true
+    created_by:
+      name: created_by
+      type: integer
+      length: 11
+      nullable: true
+    date_created:
+      name: date_created
+      type: datetime
+      nullable: true
+    modified_by:
+      name: modified_by
+      type: integer
+      length: 11
+      nullable: true
+    date_modified:
+      name: date_modified
+      type: datetime
+      nullable: true
+  indexes:
+    extension_id_index:
+      columns: [extension_id]
+  lifecycleCallbacks:
+    prePersist:
+      - onPrePersist
+      - onPrePersistCallbacks
+    preUpdate:
+      - onPreUpdate
+      - onPreUpdateCallbacks

@@ -1,0 +1,28 @@
+
+{% import "form.macro.twig" as forms %}
+
+
+<form id="{{ main_form_id }}" class="form-horizontal" action="{{ generate_url('admin.system.languages.save') }}" method="post" role="form"  enctype="multipart/form-data">
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Value</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for key,phrase in phrases %}
+                <tr>
+                    <td>{{ key }}</td>
+                    <td>{{ forms.input('phrases.' ~ key|replace({'.':'_'}), 'text', phrase)  }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    {{ forms.input('id', 'hidden', item.id, 'Id')  }}
+
+    {{ forms.input('_token' ) }} 
+
+</form>

@@ -1,0 +1,141 @@
+{
+    "backend": [{
+            "title": "General Tasks",
+            "description": "General Tasks.",
+            "controller": "System\\Flexviews\\Code\\Controllers\\Admin\\FlexviewsController::taskAction",
+            "unique_name": "admin.system.flexviews.task",
+            "route": "admin/system/flexviews/task",
+            "permissions": "can_add, can_write, can_writeown",
+            "arguments": "",
+            "keywords": "flexviews, task",
+            "priority": "0.5",
+            "changefreq": "weekly",
+            "login_required": 1,
+            "roles": {
+                "SUPER_ADMIN": ["can_add", "can_write", "can_writeown"],
+                "ADMIN": ["can_add", "can_write", "can_writeown"]
+            }
+        }, {
+            "title": "Flexview List",
+            "description": "Management of Flexviews.",
+            "controller": "System\\Flexviews\\Code\\Controllers\\Admin\\FlexviewsController::indexAction",
+            "permissions": "can_view, can_viewown",
+            "unique_name": "admin.system.flexviews",
+            "route": "admin/system/flexviews",
+            "arguments": "",
+            "keywords": "flexview, list",
+            "priority": "0.5",
+            "changefreq": "weekly",
+            "login_required": 1,
+            "roles": {
+                "SUPER_ADMIN": ["can_view", "can_viewown"],
+                "ADMIN": ["can_view", "can_viewown"]
+            }
+        }, {
+            "title": "Add Flexview ",
+            "description": "Add Flexview .",
+            "controller": "System\\Flexviews\\Code\\Controllers\\Admin\\FlexviewsController::addAction",
+            "unique_name": "admin.system.flexviews.add",
+            "route": "admin/system/flexviews/add",
+            "permissions": "can_add",
+            "arguments": {},
+            "keywords": "flexview, add",
+            "priority": "0.5",
+            "changefreq": "weekly",
+            "login_required": 1,
+            "roles": {
+                "SUPER_ADMIN": ["can_add"],
+                "ADMIN": ["can_add"]
+            }
+        }, {
+            "title": "Edit Flexview {{ item.name }}",
+            "description": "Edit Flexview {{ item.name }}.",
+            "controller": "System\\Flexviews\\Code\\Controllers\\Admin\\FlexviewsController::editAction",
+            "unique_name": "admin.system.flexviews.edit",
+            "route": "admin/system/flexviews/edit/{id}",
+            "permissions": "can_add, can_write, can_writeown",
+            "arguments": {
+                "id": null
+            },
+            "keywords": "flexview, edit, {{ item.name }}",
+            "priority": "0.5",
+            "changefreq": "weekly",
+            "login_required": 1,
+            "roles": {
+                "SUPER_ADMIN": ["can_add", "can_write", "can_writeown"],
+                "ADMIN": ["can_add", "can_write", "can_writeown"]
+            }
+        }, {
+            "title": "Flexview Detail: {{ item.name }}",
+            "description": "Flexview Detail: {{ item.name }}",
+            "controller": "System\\Flexviews\\Code\\Controllers\\Admin\\FlexviewsController::detailAction",
+            "unique_name": "admin.system.flexviews.detail",
+            "route": "admin/system/flexviews/detail/{id}",
+            "permissions": "can_view, can_viewown",
+            "arguments": {
+                "id": null
+            },
+            "keywords": "flexview, detail, {{ item.name }}",
+            "priority": "0.5",
+            "changefreq": "weekly",
+            "login_required": 1,
+            "roles": {
+                "SUPER_ADMIN": ["can_view", "can_viewown"],
+                "ADMIN": ["can_view", "can_viewown"]
+            }
+        }, {
+            "title": "Flexview Delete: {{ item.name }}",
+            "description": "Flexview Delete: {{ item.name }}",
+            "controller": "System\\Flexviews\\Code\\Controllers\\Admin\\FlexviewsController::deleteAction",
+            "unique_name": "admin.system.flexviews.delete",
+            "route": "admin/system/flexviews/delete/{id}",
+            "permissions": "can_delete, can_deleteown",
+            "arguments": {
+                "id": null
+            },
+            "keywords": "flexview, delete, {{ item.name }}",
+            "priority": "0.5",
+            "changefreq": "weekly",
+            "login_required": 1,
+            "roles": {
+                "SUPER_ADMIN": ["can_delete", "can_deleteown"],
+                "ADMIN": ["can_delete", "can_deleteown"]
+            }
+        }, {
+            "title": "Flexview Save: {{ item.name }}",
+            "description": "Flexview Save: {{ item.name }}",
+            "controller": "System\\Flexviews\\Code\\Controllers\\Admin\\FlexviewsController::saveAction",
+            "unique_name": "admin.system.flexviews.save",
+            "route": "admin/system/flexviews/save",
+            "permissions": "can_add, can_write, can_writeown",
+            "arguments": {
+                "id": null
+            },
+            "keywords": "flexview, save, {{ item.name }}",
+            "priority": "0.5",
+            "changefreq": "weekly",
+            "login_required": 1,
+            "roles": {
+                "SUPER_ADMIN": ["can_add", "can_write", "can_writeown"],
+                "ADMIN": ["can_add", "can_write", "can_writeown"]
+            }
+        }, {
+            "title": "Flexview Install: {{ item.name }}",
+            "description": "Flexview Install: {{ item.name }}",
+            "controller": "System\\Flexviews\\Code\\Controllers\\Admin\\FlexviewsController::installAction",
+            "unique_name": "admin.system.flexviews.install",
+            "route": "admin/system/flexviews/install",
+            "permissions": "can_add, can_write, can_writeown",
+            "arguments": {
+                "path": null
+            },
+            "keywords": "flexview, Install, {{ item.name }}",
+            "priority": "0.5",
+            "changefreq": "weekly",
+            "login_required": 1,
+            "roles": {
+                "SUPER_ADMIN": ["can_add", "can_write", "can_writeown"],
+                "ADMIN": ["can_add", "can_write", "can_writeown"]
+            }
+        }]
+} 	

@@ -1,0 +1,109 @@
+<link rel="stylesheet" type="text/css" href="{{ web_root }}assets/css/bootstrap.css">
+<link rel="stylesheet" type="text/css" href="{{ web_root }}applications/Generator/assets/css/style.css">
+
+<div class="col-sm-12">
+    <div class="col-sm-8">
+        <h3>Extensions List</h3>
+    </div>
+</div>
+
+<div class="col-sm-12">
+
+    <a class="btn btn-success btn-sm btn-flat" href="{{ web_base }}/admin/system-install">
+        Update All
+    </a>
+    <div class="clearfix"></div>
+
+
+    <div class="btn-group" role="group" aria-label="...">
+        <button type="button" class="btn btn-default show_installed">Installed</button>
+        <button type="button" class="btn btn-default show_available">Available</button>
+    </div>
+
+
+    {% if items.repositories|length %}
+        {% for repository in items.repositories %}
+            <div class="row">
+                <div class="col-sm-8">
+                    <h3>{{ repository.title }}</h3>
+                    <b>{{ repository.description|raw }}</b>
+                    <hr>
+                </div>
+
+                <div class="col-sm-4">
+                    <br>
+                    <a class="btn btn-success btn-sm btn-flat pull-right" href="{{ web_base }}/admin/system-download/kazist/framework/{{ repository.id}}">
+                        <i class="glyphicon glyphicon-download-alt"></i>
+                        Update Core
+                    </a>
+                    <a class="btn btn-default btn-sm btn-flat pull-right" href="{{ web_base }}/admin/system-download/vendor/vendor/{{ repository.id}}">
+                        <i class="glyphicon glyphicon-download-alt"></i>
+                        Update Vendor
+                    </a>
+                </div>
+            </div>
+
+            {% if repository.updates.component|length %}
+                {% for item in repository.updates.component %}
+
+                    <div class="col-sm-3 {% if not item.is_installed %}available{% else %}installed{% endif %}">
+                        <div class="generator-item">
+
+                            {% if item.extension == 'component'%}
+                                <label class="label label-success pull-right">{{ item.extension }}</label>
+                            {% else %}
+                                <label class="label label-primary pull-right">{{ item.extension }}</label>
+                            {% endif %}
+
+                            <h3>{{ item.name }}</h3>
+
+                            {% if item.icon != '' %}
+                                <img src="{{ item.icon }}">
+                            {% endif %}
+
+                            {{ item.description| truncate(60)  }}
+
+                            <br>
+                            {% if not item.is_core %}
+                                {% if not item.is_installed %}
+                                    <a class="btn btn-warning btn-xs btn-flat pull-right" href="{{ web_base }}/admin/system-download/{{ item.name}}/{{ item.type}}/{{ repository.id}}">
+                                        <i class="glyphicon glyphicon-download"></i> &nbsp; Install
+                                    </a>
+                                {% elseif item.is_installed and item.installed_version != item.update_version %}
+                                    <a class="btn btn-success btn-xs btn-flat pull-right" href="{{ web_base }}/admin/system-download/{{ item.name}}/{{ item.type}}/{{ repository.id}}">
+                                        <i class="glyphicon glyphicon-download"></i> &nbsp; Update
+                                    </a>
+                                {% endif %}
+                            {% endif %}
+                        </div>
+                    </div>
+                {% endfor %}
+            {% endif %}
+
+        {% endfor %}
+    {% endif %}
+
+</div>
+<br>
+<!-- End row -->
+
+<style>
+    .available{
+        display:none;
+    }
+</style>
+
+<script>
+    jQuery(document).ready(function () {
+
+        jQuery('.show_installed').click(function () {
+            jQuery('.installed').show();
+            jQuery('.available').hide();
+        });
+
+        jQuery('.show_available').click(function () {
+            jQuery('.installed').hide();
+            jQuery('.available').show();
+        });
+    });
+</script>

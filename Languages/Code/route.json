@@ -1,0 +1,123 @@
+{
+    "backend": [{
+            "title": "General Tasks",
+            "description": "General Tasks.",
+            "controller": "System\\Languages\\Code\\Controllers\\Admin\\LanguagesController::taskAction",
+            "unique_name": "admin.adverts.languages.task",
+            "route": "admin/adverts/languages/task",
+            "permissions": "can_add, can_write, can_writeown",
+            "arguments": "",
+            "keywords": "languages, task",
+            "priority": "0.5",
+            "changefreq": "weekly",
+            "login_required": 1,
+            "roles": {
+                "SUPER_ADMIN": ["can_add", "can_write", "can_writeown"],
+                "ADMIN": ["can_add", "can_write", "can_writeown"]
+            }
+        }, {
+            "title": "Language List",
+            "description": "Management of Languages.",
+            "controller": "System\\Languages\\Code\\Controllers\\Admin\\LanguagesController::indexAction",
+            "permissions": "can_view, can_viewown",
+            "unique_name": "admin.system.languages",
+            "route": "admin/system/languages",
+            "arguments": "",
+            "keywords": "language, list",
+            "priority": "0.5",
+            "changefreq": "weekly",
+            "login_required": 1,
+            "roles": {
+                "SUPER_ADMIN": ["can_view", "can_viewown"],
+                "ADMIN": ["can_view", "can_viewown"]
+            }
+        }, {
+            "title": "Add Language ",
+            "description": "Add Language .",
+            "controller": "System\\Languages\\Code\\Controllers\\Admin\\LanguagesController::addAction",
+            "unique_name": "admin.system.languages.add",
+            "route": "admin/system/languages/add",
+            "permissions": "can_add",
+            "arguments": {},
+            "keywords": "language,add",
+            "priority": "0.5",
+            "changefreq": "weekly",
+            "login_required": 1,
+            "roles": {
+                "SUPER_ADMIN": ["can_add"],
+                "ADMIN": ["can_add"]
+            }
+        }, {
+            "title": "Edit Language {{ item.name }}",
+            "description": "Edit Language {{ item.name }}.",
+            "controller": "System\\Languages\\Code\\Controllers\\Admin\\LanguagesController::editAction",
+            "unique_name": "admin.system.languages.edit",
+            "route": "admin/system/languages/edit/{id}",
+            "permissions": "can_add, can_write, can_writeown",
+            "arguments": {
+                "id": null
+            },
+            "keywords": "language, list, {{ item.name }}",
+            "priority": "0.5",
+            "changefreq": "weekly",
+            "login_required": 1,
+            "roles": {
+                "SUPER_ADMIN": ["can_add", "can_write", "can_writeown"],
+                "ADMIN": ["can_add", "can_write", "can_writeown"]
+            }
+        }, {
+            "title": "Language Detail: {{ item.name }}",
+            "description": "Language Detail: {{ item.name }}",
+            "controller": "System\\Languages\\Code\\Controllers\\Admin\\LanguagesController::detailAction",
+            "unique_name": "admin.system.languages.detail",
+            "route": "admin/system/languages/detail/{id}",
+            "permissions": "can_view, can_viewown",
+            "arguments": {
+                "id": null
+            },
+            "keywords": "language, list, {{ item.name }}",
+            "priority": "0.5",
+            "changefreq": "weekly",
+            "login_required": 1,
+            "roles": {
+                "SUPER_ADMIN": ["can_view", "can_viewown"],
+                "ADMIN": ["can_view", "can_viewown"]
+            }
+        }, {
+            "title": "Language Delete: {{ item.name }}",
+            "description": "Language Delete: {{ item.name }}",
+            "controller": "System\\Languages\\Code\\Controllers\\Admin\\LanguagesController::deleteAction",
+            "unique_name": "admin.system.languages.delete",
+            "route": "admin/system/languages/delete/{id}",
+            "permissions": "can_delete, can_deleteown",
+            "arguments": {
+                "id": null
+            },
+            "keywords": "language, delete, {{ item.name }}",
+            "priority": "0.5",
+            "changefreq": "weekly",
+            "login_required": 1,
+            "roles": {
+                "SUPER_ADMIN": ["can_delete", "can_deleteown"],
+                "ADMIN": ["can_delete", "can_deleteown"]
+            }
+        }, {
+            "title": "Language Save: {{ item.name }}",
+            "description": "Language Save: {{ item.name }}",
+            "controller": "System\\Languages\\Code\\Controllers\\Admin\\LanguagesController::saveAction",
+            "unique_name": "admin.system.languages.save",
+            "route": "admin/system/languages/save",
+            "permissions": "can_add, can_write, can_writeown",
+            "arguments": {
+                "id": null
+            },
+            "keywords": "language, save, {{ item.name }}",
+            "priority": "0.5",
+            "changefreq": "weekly",
+            "login_required": 1,
+            "roles": {
+                "SUPER_ADMIN": ["can_add", "can_write", "can_writeown"],
+                "ADMIN": ["can_add", "can_write", "can_writeown"]
+            }
+        }]
+} 	

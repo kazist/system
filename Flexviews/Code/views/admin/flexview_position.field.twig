@@ -1,0 +1,14 @@
+{% import "form.macro.twig" as forms %}
+
+{% set positions = get_context('positions') %}
+{% set menu_positions = get_context('menu_positions') %}
+{% set selected_positions = get_context('selected_positions') %}
+{% set selected_menu_positions = get_context('selected_menu_positions') %}
+
+<div class="snippet_access_positions">
+
+    <h5>Site Positions</h5>
+    {{ forms.input('positions', 'checkbox', selected_positions, null, class, id, attributes, readonly, positions, setting, context) }}
+
+</div>
+

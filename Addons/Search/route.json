@@ -1,0 +1,22 @@
+{
+    "frontend": [{
+            "title": "Search",
+            "description": "Search.",
+            "controller": "System\\Addons\\Search\\Controllers\\SearchController::indexAction",
+            "permissions": "can_view, can_viewown",
+            "unique_name": "system.addons.search",
+            "route": "system/addons/search",
+            "arguments": "",
+            "keywords": "system, addons, list, search",
+            "priority": "0.5",
+            "changefreq": "weekly",
+            "login_required": 0,
+            "roles": {
+                "SUPER_ADMIN": ["can_view", "can_viewown"],
+                "ADMIN": ["can_view", "can_viewown"],
+                "MODERATOR": ["can_view", "can_viewown"],
+                "USER": ["can_view", "can_viewown"]
+            }
+        }]
+
+} 	

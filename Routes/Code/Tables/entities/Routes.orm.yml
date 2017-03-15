@@ -1,0 +1,129 @@
+System\Routes\Code\Tables\Routes:
+  table: system_routes
+  type: entity
+  id:
+    id:
+      type: integer
+      generator: { strategy: AUTO }
+  fields:
+    subset_id:
+      name: subset_id
+      type: integer
+      length: '11'
+      nullable: true
+    title:
+      name: title
+      type: string
+      length: 255
+      nullable: false
+    description:
+      name: description
+      type: string
+      length: 255
+      nullable: false
+    viewside:
+      name: viewside
+      type: string
+      length: 255
+      nullable: true
+    unique_name:
+      name: unique_name
+      type: string
+      length: 255
+      unique: 'true'
+      nullable: true
+    controller:
+      name: controller
+      type: string
+      length: 255
+      nullable: true
+    route:
+      name: route
+      type: string
+      length: 255
+      nullable: true
+    arguments:
+      name: arguments
+      type: string
+      length: 255
+      nullable: true
+    seo_url:
+      name: seo_url
+      type: string
+      length: 255
+      nullable: true
+    seo_arguments:
+      name: seo_arguments
+      type: string
+      length: 255
+      nullable: true
+    keywords:
+      name: keywords
+      type: string
+      length: 255
+      nullable: true
+    changefreq:
+      name: changefreq
+      type: string
+      length: 255
+      nullable: true
+    priority:
+      name: priority
+      type: string
+      length: 255
+      nullable: true
+    login_required:
+      name: login_required
+      type: integer
+      length: 11
+      nullable: true
+    extension_path:
+      name: extension_path
+      type: string
+      length: 255
+      nullable: false
+    published:
+      name: published
+      type: integer
+      length: 11
+      nullable: true
+    is_processed:
+      name: is_processed
+      type: integer
+      length: 11
+      nullable: true
+    permissions:
+      name: permissions
+      type: string
+      length: 255
+      nullable: true
+    created_by:
+      name: created_by
+      type: integer
+      length: 11
+      nullable: true
+    date_created:
+      name: date_created
+      type: datetime
+      nullable: true
+    modified_by:
+      name: modified_by
+      type: integer
+      length: 11
+      nullable: true
+    date_modified:
+      name: date_modified
+      type: datetime
+      nullable: true
+  indexes:
+    subset_id_index:
+      columns: [subset_id]
+    controller_index:
+      columns: [controller]
+  lifecycleCallbacks:
+    prePersist:
+      - onPrePersist
+      - onPrePersistCallbacks
+    preUpdate:
+      - onPreUpdate
+      - onPreUpdateCallbacks

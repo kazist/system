@@ -1,0 +1,49 @@
+
+{% import "form.macro.twig" as forms %}
+
+{{ set_assets('applications/System/Addons/Search/assets/js/search.js') }}
+
+<form id="main-search-form" action="{{ generate_url('search.indexes') }}" class="form-horizontal" method="post" role="form" enctype="multipart/form-data">
+    <div class="input-group">
+        <div class="input-group-btn search-panel">
+            {% if filters|length > 0 and show_filter %}
+                <button type="button" class="btn btn-default btn-flat dropdown-toggle" data-toggle="dropdown">
+                        {% if search_filter != '' and search_filter != 'all' %}
+                            {% for filter in filters %}
+                                {% if search_filter == filter.alias %}
+                                    <span id="search_concept">{{ filter.title }}</span> 
+                                    <span class="caret"></span>
+                                {% endif %}
+                            {% endfor %}
+                        {% else %}
+                            <span id="search_concept">Filter by</span> <span class="caret"></span>
+                        {% endif %}
+                </button>
+                <ul class="dropdown-menu" role="menu">
+                    {% for filter in filters %}
+                        <li>
+                            <a href="#{{ filter.alias }}" title='{{ filter.title }}'>
+                                {{ filter.title }}
+                            </a>
+                        </li>
+                    {% endfor %}
+                    <li class="divider"></li>
+                    <li><a href="#all" title='Anything'>Anything</a></li>
+                </ul>
+            {% endif %}
+        </div>
+
+        <input type="hidden" name="search_filter" value="{{ search_filter|default('all') }}" id="search_filter">         
+        <input type="text" class="form-control" name="search_phrase" value="{{ search_phrase }}" placeholder="Search term...">
+
+        <span class="input-group-btn">
+            <button class="btn btn-{{ theme|default('warning')}}" type="submit">
+                <span class="glyphicon glyphicon-search"></span> Search
+            </button>
+        </span>
+    </div>
+
+    {{ forms.input('_token' ) }} 
+
+</form>
+

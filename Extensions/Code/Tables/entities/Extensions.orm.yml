@@ -1,0 +1,75 @@
+System\Extensions\Code\Tables\Extensions:
+  table: system_extensions
+  type: entity
+  id:
+    id:
+      type: integer
+      generator: { strategy: AUTO }
+  fields:
+    title:
+      name: title
+      type: string
+      length: 255
+      nullable: false
+    name:
+      name: name
+      type: string
+      length: 255
+      nullable: false
+    description:
+      name: description
+      type: text
+      nullable: false
+    path:
+      name: path
+      type: string
+      length: 255
+      nullable: true
+    icon:
+      name: icon
+      type: string
+      length: 255
+      nullable: true
+    extension:
+      name: extension
+      type: string
+      length: 255
+      nullable: true
+    version:
+      name: version
+      type: string
+      length: 255
+      nullable: true
+    is_core:
+      name: is_core
+      type: integer
+      length: 11
+      nullable: true
+    created_by:
+      name: created_by
+      type: integer
+      length: 11
+      nullable: false
+    date_created:
+      name: date_created
+      type: datetime
+      nullable: false
+    modified_by:
+      name: modified_by
+      type: integer
+      length: 11
+      nullable: false
+    date_modified:
+      name: date_modified
+      type: datetime
+      nullable: false
+  indexes:
+    name_index:
+      columns: [name]
+  lifecycleCallbacks:
+    prePersist:
+      - onPrePersist
+      - onPrePersistCallbacks
+    preUpdate:
+      - onPreUpdate
+      - onPreUpdateCallbacks

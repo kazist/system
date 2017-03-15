@@ -1,0 +1,53 @@
+[
+    {
+        "title": "Megamenu List",
+        "show_title": "1",
+        "unique_name": "system.addons.megamenu",
+        "icon": "fa-user",
+        "homepage": "1",
+        "allpages": "1",
+        "extensionpages": "1",
+        "viewside": "frontend",
+        "explanation": "",
+        "description": "",
+        "suffix_content": "",
+        "prefix_content": "",
+        "main_content": "",
+        "params": {
+            "category_id": 2
+        },
+        "setting": [{
+                "name": "category_id",
+                "label": "Menu Category",
+                "type": "select",
+                "source": {
+                    "custom": [{
+                            "value": "1",
+                            "text": "Default Category"
+                        }],
+                    "table": {
+                        "name": "#__system_menus_categories",
+                        "where": ["published=1", "is_core=0"],
+                        "order": ["title ASC"],
+                        "value": "id",
+                        "text": "title"
+                    }
+                }
+            }, {
+                "name": "template",
+                "label": "Menu Template",
+                "type": "select",
+                "source": {
+                    "custom": [{
+                            "value": "custom",
+                            "text": "Custom Megamenu"
+                        }, {
+                            "value": "unify",
+                            "text": "Unify Megamenu"
+                        }]
+                }
+            }],
+        "positions": []
+
+    }
+]

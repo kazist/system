@@ -1,0 +1,37 @@
+<div class="form-horizontal">
+    <br>
+    <div class="form-group publishing-date-group">
+        <label for="title" class="col-sm-3 control-label">Publishing Date</label>
+        <div class="col-sm-9 kazicode-form-field">
+            <div class="blog-publish-up">
+                {{ forms.input('publish_up', 'datetime',  item.publish_up) }}
+            </div>
+            <div class="blog-publish-connector">
+                To
+            </div>
+            <div class="blog-publish-down">
+                {{ forms.input('publish_down', 'datetime',  item.publish_down) }}
+            </div>
+        </div>
+    </div>
+
+    <div>
+        <div class="form-group publishing-date-group">
+            <label for="title" class="col-sm-3 control-label"></label>
+            <div class="col-sm-9 kazicode-form-field">
+                <div class="col-sm-4">
+                    <label>Published</label><br>
+                    {{ forms.input('published', 'yesno',  item.published) }}
+                </div>
+                <div class="col-sm-4">
+                    <label>Featured</label><br>
+                    {{ forms.input('featured', 'yesno',  item.featured) }}
+                </div>
+                <div class="col-sm-4">
+                    <label>Shared</label><br>
+                    {{ forms.input('shared', 'yesno',  item.shared) }}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

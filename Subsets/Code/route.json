@@ -1,0 +1,136 @@
+{
+    "frontend": [{
+            "title": "System Subsets",
+            "description": "System Subsets",
+            "controller": "System\\Subsets\\Code\\Controllers\\SubsetsController::cronprocessincompletesAction",
+            "unique_name": "systems.subsets.cronprocessincompletes",
+            "route": "systems/subsets/cronprocessincompletes",
+            "permissions": "can_view, can_viewown",
+            "arguments": {},
+            "keywords": "cronprocessincompletes, subsets",
+            "priority": "0.5",
+            "changefreq": "weekly",
+            "login_required": 0
+        }],
+    "backend": [{
+            "title": "General Tasks",
+            "description": "General Tasks.",
+            "controller": "System\\Subsets\\Code\\Controllers\\Admin\\SubsetsController::taskAction",
+            "unique_name": "admin.system.subsets.task",
+            "route": "admin/system/subsets/task",
+            "permissions": "can_add, can_write, can_writeown",
+            "arguments": "",
+            "keywords": "subsets, task",
+            "priority": "0.5",
+            "changefreq": "weekly",
+            "login_required": 1,
+            "roles": {
+                "SUPER_ADMIN": ["can_add", "can_write", "can_writeown"],
+                "ADMIN": ["can_add", "can_write", "can_writeown"]
+            }
+        }, {
+            "title": "Subset List",
+            "description": "Management of Subsets.",
+            "controller": "System\\Subsets\\Code\\Controllers\\Admin\\SubsetsController::indexAction",
+            "permissions": "can_view, can_viewown",
+            "unique_name": "admin.system.subsets",
+            "route": "admin/system/subsets",
+            "arguments": "",
+            "keywords": "subset, list",
+            "priority": "0.5",
+            "changefreq": "weekly",
+            "login_required": 1,
+            "roles": {
+                "SUPER_ADMIN": ["can_view", "can_viewown"],
+                "ADMIN": ["can_view", "can_viewown"]
+            }
+        }, {
+            "title": "Add Subset ",
+            "description": "Add Subset .",
+            "controller": "System\\Subsets\\Code\\Controllers\\Admin\\SubsetsController::addAction",
+            "unique_name": "admin.system.subsets.add",
+            "route": "admin/system/subsets/add",
+            "permissions": "can_add",
+            "arguments": {},
+            "keywords": "subset, add",
+            "priority": "0.5",
+            "changefreq": "weekly",
+            "login_required": 1,
+            "roles": {
+                "SUPER_ADMIN": ["can_add"],
+                "ADMIN": ["can_add"]
+            }
+        }, {
+            "title": "Edit Subset {{ item.name }}",
+            "description": "Edit Subset {{ item.name }}.",
+            "controller": "System\\Subsets\\Code\\Controllers\\Admin\\SubsetsController::editAction",
+            "unique_name": "admin.system.subsets.edit",
+            "route": "admin/system/subsets/edit/{id}",
+            "permissions": "can_add, can_write, can_writeown",
+            "arguments": {
+                "id": null
+            },
+            "keywords": "subset, list, {{ item.name }}",
+            "priority": "0.5",
+            "changefreq": "weekly",
+            "login_required": 1,
+            "roles": {
+                "SUPER_ADMIN": ["can_add", "can_write", "can_writeown"],
+                "ADMIN": ["can_add", "can_write", "can_writeown"]
+            }
+        }, {
+            "title": "Subset Detail: {{ item.name }}",
+            "description": "Subset Detail: {{ item.name }}",
+            "controller": "System\\Subsets\\Code\\Controllers\\Admin\\SubsetsController::detailAction",
+            "unique_name": "admin.system.subsets.detail",
+            "route": "admin/system/subsets/detail/{id}",
+            "permissions": "can_view, can_viewown",
+            "arguments": {
+                "id": null
+            },
+            "keywords": "subset, list, {{ item.name }}",
+            "priority": "0.5",
+            "changefreq": "weekly",
+            "login_required": 1,
+            "roles": {
+                "SUPER_ADMIN": ["can_view", "can_viewown"],
+                "ADMIN": ["can_view", "can_viewown"]
+            }
+        }, {
+            "title": "Subset Delete: {{ item.name }}",
+            "description": "Subset Delete: {{ item.name }}",
+            "controller": "System\\Subsets\\Code\\Controllers\\Admin\\SubsetsController::deleteAction",
+            "unique_name": "admin.system.subsets.delete",
+            "route": "admin/system/subsets/delete/{id}",
+            "permissions": "can_delete, can_deleteown",
+            "arguments": {
+                "id": null
+            },
+            "keywords": "subset, delete, {{ item.name }}",
+            "priority": "0.5",
+            "changefreq": "weekly",
+            "login_required": 1,
+            "roles": {
+                "SUPER_ADMIN": ["can_delete", "can_deleteown"],
+                "ADMIN": ["can_delete", "can_deleteown"]
+            }
+        }, {
+            "title": "Subset Save: {{ item.name }}",
+            "description": "Subset Save: {{ item.name }}",
+            "controller": "System\\Subsets\\Code\\Controllers\\Admin\\SubsetsController::saveAction",
+            "unique_name": "admin.system.subsets.save",
+            "route": "admin/system/subsets/save",
+            "permissions": "can_add, can_write, can_writeown",
+            "arguments": {
+                "id": null
+            },
+            "keywords": "subset, save, {{ item.name }}",
+            "priority": "0.5",
+            "changefreq": "weekly",
+            "login_required": 1,
+            "roles": {
+                "SUPER_ADMIN": ["can_add", "can_write", "can_writeown"],
+                "ADMIN": ["can_add", "can_write", "can_writeown"]
+            }
+        }]
+} 	

@@ -1,0 +1,81 @@
+
+
+
+
+<ul class="sidebar-menu">
+
+    <li class="header">MAIN NAVIGATION</li>
+
+    {% if categories|length > 0 %}
+        {% for key,category in categories %}   
+            <li class="treeview {% if not key %}active{% endif %}">
+                <a href="#">
+                    <i class="fa {{ category.icon }}"></i>
+                    <span>{{ category.title }}</span>
+                    <i class="fa fa-angle-left pull-right"></i>
+                </a>
+                {% if category.menus|length > 0 %}
+
+                    <ul class="treeview-menu">
+                        {% for cat_menu in category.menus  %}
+                            <li>
+                                {% if cat_menu.children|length > 0 %}
+                                    <a href="#">
+                                        <i class="fa fa-circle-o"></i>{{ cat_menu.title }} <i class="fa fa-angle-left pull-right"></i>
+                                    </a>
+                                    <ul class="treeview-menu">
+
+                                        {% if cat_menu.url != '' %}
+                                            <li>
+                                                <a href="{{ web_base}}/{{ cat_menu.url }}"><i class="fa fa-circle-o"></i> 
+                                                    {{ cat_menu.title }}
+                                                </a>
+                                            </li>
+                                        {% endif %}
+
+                                        {% for kids_menu in cat_menu.children  %}
+                                            <li>
+                                                <a href="{{ web_base}}/{{ kids_menu.url }}"><i class="fa fa-circle-o"></i> {{ kids_menu.title }}</a>
+                                            </li>
+                                        {% endfor %}
+                                    </ul>
+                                {% else %}
+                                    <a href="{{ web_base}}/{{ cat_menu.url }}"><i class="fa fa-circle-o"></i> 
+                                        {{ cat_menu.title }}
+                                    </a>
+                                {% endif %}
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            </li>      
+
+        {% endfor %}
+    {% endif %}
+
+
+    <li class="header">Configuration</li>
+
+    <li><a href="{{web_base}}/admin/system/languages?path={{ document.root_route }}"><i class="fa fa-circle-o text-red"></i> <span>Languages</span></a></li>
+    <li><a href="{{web_base}}/admin/system/settings?path={{ document.root_route }}"><i class="fa fa-circle-o text-yellow"></i> <span>Settings</span></a></li>
+    
+</ul>
+
+<!-- Modal -->
+<div class="modal fade" id="launcherModal" tabindex="10" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Application Dashboard</h4>
+            </div>
+            <div class="modal-body">
+                {{ icon_menus|raw }}
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>

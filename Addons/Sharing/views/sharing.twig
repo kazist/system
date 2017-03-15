@@ -1,0 +1,44 @@
+
+{{ set_assets('applications/System/Addons/Sharing/assets/css/sharing.css') }}
+
+{% set facebook = callFunction( "System.Addons.Sharing.Classes.Sharing", 'countFacebook' ) %}
+{% set twitter = callFunction( "System.Addons.Sharing.Classes.Sharing", 'countTwitter' ) %}
+{% set youtube = callFunction( "System.Addons.Sharing.Classes.Sharing", 'countYoutube' ) %}
+
+<div id="socialbox">
+    <ul>
+        <li>
+            <p>
+                <a title="Like on Facebook" href="{{ facebook.url }}" target="_blank">
+                    <img src="http://www.omgubuntu.co.uk/wp-content/plugins/socialbox/images/icons/facebook_16.png" alt="Facebook" title="Facebook" data-pin-nopin="true" />
+                </a>
+                {{ facebook.count }} Fans
+                <a class="socialbox-button pull-right" title="Like on Facebook" href="{{ facebook.url }}" target="_blank">
+                    Like
+                </a>
+            </p>
+        </li>
+        <li>
+            <p>
+                <a title="Follow on Twitter" href="{{ twitter.url }}" target="_blank">
+                    <img src="http://www.omgubuntu.co.uk/wp-content/plugins/socialbox/images/icons/twitter_16.png" alt="Twitter" title="Twitter" />
+                </a>
+                {{ twitter.count }} Followers 
+                <a class="socialbox-button pull-right" title="Follow on Twitter" href="{{ twitter.url }}" target="_blank">
+                    Follow
+                </a>
+            </p>
+        </li>
+        <li>
+            <p>
+                <a title="Subscribe to Youtube Channel" href="{{ twitter.url }}" target="_blank">
+                    <img src="http://www.omgubuntu.co.uk/wp-content/plugins/socialbox/images/icons/youtube_16.png" alt="YouTube" title="YouTube" />
+                </a>
+                {{ twitter.count }} Subscribers 
+                <a class="socialbox-button pull-right" title="Subscribe to Youtube Channel" href="{{ twitter.url }}" target="_blank">
+                    Subscribe
+                </a>
+            </p>
+        </li>
+    </ul>
+</div>

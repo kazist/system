@@ -1,0 +1,123 @@
+{
+    "backend": [{
+            "title": "General Tasks",
+            "description": "General Tasks.",
+            "controller": "System\\Settings\\Code\\Controllers\\Admin\\SettingsController::taskAction",
+            "unique_name": "admin.system.settings.task",
+            "route": "admin/system/settings/task",
+            "permissions": "can_add, can_write, can_writeown",
+            "arguments": "",
+            "keywords": "candidate, task",
+            "priority": "0.5",
+            "changefreq": "weekly",
+            "login_required": 1,
+            "roles": {
+                "SUPER_ADMIN": ["can_add", "can_write", "can_writeown"],
+                "ADMIN": ["can_add", "can_write", "can_writeown"]
+            }
+        }, {
+            "title": "Setting List",
+            "description": "Management of Settings.",
+            "controller": "System\\Settings\\Code\\Controllers\\Admin\\SettingsController::indexAction",
+            "permissions": "can_view, can_viewown",
+            "unique_name": "admin.system.settings",
+            "route": "admin/system/settings",
+            "arguments": "",
+            "keywords": "setting, list",
+            "priority": "0.5",
+            "changefreq": "weekly",
+            "login_required": 1,
+            "roles": {
+                "SUPER_ADMIN": ["can_view", "can_viewown"],
+                "ADMIN": ["can_view", "can_viewown"]
+            }
+        }, {
+            "title": "Add Setting ",
+            "description": "Add Setting .",
+            "controller": "System\\Settings\\Code\\Controllers\\Admin\\SettingsController::addAction",
+            "unique_name": "admin.system.settings.add",
+            "route": "admin/system/settings/add",
+            "permissions": "can_add",
+            "arguments": {},
+            "keywords": "setting, add",
+            "priority": "0.5",
+            "changefreq": "weekly",
+            "login_required": 1,
+            "roles": {
+                "SUPER_ADMIN": ["can_add"],
+                "ADMIN": ["can_add"]
+            }
+        }, {
+            "title": "Edit Setting {{ item.name }}",
+            "description": "Edit Setting {{ item.name }}.",
+            "controller": "System\\Settings\\Code\\Controllers\\Admin\\SettingsController::editAction",
+            "unique_name": "admin.system.settings.edit",
+            "route": "admin/system/settings/edit/{id}",
+            "permissions": "can_add, can_write, can_writeown",
+            "arguments": {
+                "id": null
+            },
+            "keywords": "setting, list, {{ item.name }}",
+            "priority": "0.5",
+            "changefreq": "weekly",
+            "login_required": 1,
+            "roles": {
+                "SUPER_ADMIN": ["can_add", "can_write", "can_writeown"],
+                "ADMIN": ["can_add", "can_write", "can_writeown"]
+            }
+        }, {
+            "title": "Setting Detail: {{ item.name }}",
+            "description": "Setting Detail: {{ item.name }}",
+            "controller": "System\\Settings\\Code\\Controllers\\Admin\\SettingsController::detailAction",
+            "unique_name": "admin.system.settings.detail",
+            "route": "admin/system/settings/detail/{id}",
+            "permissions": "can_view, can_viewown",
+            "arguments": {
+                "id": null
+            },
+            "keywords": "setting, list, {{ item.name }}",
+            "priority": "0.5",
+            "changefreq": "weekly",
+            "login_required": 1,
+            "roles": {
+                "SUPER_ADMIN": ["can_view", "can_viewown"],
+                "ADMIN": ["can_view", "can_viewown"]
+            }
+        }, {
+            "title": "Setting Delete: {{ item.name }}",
+            "description": "Setting Delete: {{ item.name }}",
+            "controller": "System\\Settings\\Code\\Controllers\\Admin\\SettingsController::deleteAction",
+            "unique_name": "admin.system.settings.delete",
+            "route": "admin/system/settings/delete/{id}",
+            "permissions": "can_delete, can_deleteown",
+            "arguments": {
+                "id": null
+            },
+            "keywords": "setting, delete, {{ item.name }}",
+            "priority": "0.5",
+            "changefreq": "weekly",
+            "login_required": 1,
+            "roles": {
+                "SUPER_ADMIN": ["can_delete", "can_deleteown"],
+                "ADMIN": ["can_delete", "can_deleteown"]
+            }
+        }, {
+            "title": "Setting Save: {{ item.name }}",
+            "description": "Setting Save: {{ item.name }}",
+            "controller": "System\\Settings\\Code\\Controllers\\Admin\\SettingsController::saveAction",
+            "unique_name": "admin.system.settings.save",
+            "route": "admin/system/settings/save",
+            "permissions": "can_add, can_write, can_writeown",
+            "arguments": {
+                "id": null
+            },
+            "keywords": "setting, save, {{ item.name }}",
+            "priority": "0.5",
+            "changefreq": "weekly",
+            "login_required": 1,
+            "roles": {
+                "SUPER_ADMIN": ["can_add", "can_write", "can_writeown"],
+                "ADMIN": ["can_add", "can_write", "can_writeown"]
+            }
+        }]
+} 	

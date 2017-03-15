@@ -1,0 +1,35 @@
+
+{{ set_assets('applications/Cms/assets/css/ratesurvey.css') }}
+{{ set_assets('applications/Cms/assets/js/rate.js') }}
+
+{% if item.has_opinion %}
+
+    {% set parameters = {'rate_id':1} %}
+
+    {% set rate = callFunction( "Cms.Rates.Code.Models.RatesModel", 'getRate', parameters ) %}
+
+    <div class="survey-rate">
+        <div class="survey-rate-title">
+            What do you think of this post?
+        </div>
+        <div class="survey-rate-items">
+            {% if rate.options|length > 0 %}
+
+                {% for option in rate.options %}
+                    <div class="col-sm-{{ 12/rate.options|length | number_format()  }}">
+                        <div class="survey-rate-item">
+                            <div class="survey-rate-item-percent">
+                                {{ (option.option_votes/rate.total_votes*100) | number_format() }}%
+                            </div>
+                            {{ option.option }}
+                        </div>
+                    </div>
+                {% endfor %}
+            {% endif %}
+
+        </div>
+        <div class="clearfix"></div>
+        <br>
+    </div>
+{% endif %}
+

@@ -1,0 +1,73 @@
+{{ set_assets('applications/System/Addons/Megamenu/assets/css/megamenu.css') }}
+{{ set_assets('applications/System/Addons/Megamenu/assets/js/megamenu.js') }}
+
+{% import "blocks.index.twig" as block_index %}
+
+<ul class="nav navbar-nav">
+
+    {% if menus|length > 0 %}
+        {% for menu in menus %}
+            {% if (menu.children|length==0 and menu.blocks|length==0) %}
+
+                <li><a href="{{ menu.url }}" title="{{ menu.title }}">{{ menu.title|capitalize }}</a></li>
+
+            {% elseif (menu.children|length>0 and menu.blocks|length==0) %}
+
+                <li class="dropdown">
+                    <a href="{{  menu.url }}" class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown" data-hover="dropdown"data-delay="2000" title="{{ menu.title }}" >{{ menu.title|capitalize  }}<span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+
+                        {% if menu.children|length > 0 %}
+                            {% for child in menu.children %}
+
+                                <li><a href="{{  child.url }}" title="{{ child.title }}">{{ child.title }}</a></li>
+
+                            {% endfor %}
+                        {% endif %}
+
+                    </ul>
+                </li>
+
+            {% elseif (menu.children|length>0 or menu.blocks|length>0) %}
+
+                {% set section_count = menu.children|length + menu.blocks|length %}
+                {% set div_size = 12 %}
+
+                <li class="dropdown mega-dropdown">
+                    <a href="{{  menu.url }}" class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown" data-delay="2000" title="{{ menu.title }}">{{ menu.title|capitalize }}<span class="caret"></span></a>
+
+                    <ul class="dropdown-menu mega-dropdown-menu row">
+
+                        {% if menu.children|length > 0 %}
+
+                            <li class="col-sm-2">
+                                <ul class="mega-submenu">
+                                    {% for child in menu.children %}
+                                        <li><a href="{{  child.url }}" title="{{ child.title }}">{{ child.title }}</a></li>
+                                        {% endfor %}
+                                </ul>
+                            </li>
+
+                            {% set div_size = 10 %}
+
+                        {% endif %}
+
+                        {% if menu.blocks|length > 0 %}
+                            <li class="col-sm-{{ div_size }}">
+                                {% for block in menu.blocks %}
+                                    <div>
+                                        {{ block_index.render_single_block(block) }}
+                                    </div>
+                                {% endfor %}
+                            </li>
+                        {% endif %}
+                    </ul>
+                </li>
+
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+
+</ul>
+
+

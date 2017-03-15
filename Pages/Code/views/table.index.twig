@@ -1,0 +1,117 @@
+{# empty Twig template #}
+
+{{ set_assets('applications/Cms/assets/css/article.css') }}
+
+{% set item_url = generate_url('cms.articles.detail', {'id':items.0.id}) %}
+
+<h1 class="component-header">Articles</h1>
+
+<div class="cms-row-article">
+
+    <div class="cms-top-article">
+
+        <div class="col-sm-6">
+
+            <div class="cms-article-title">
+                <a href="{{ item_url }}" title='{{ items.0.title }}'>
+                    {{ items.0.title }}
+                </a>
+            </div>
+
+            <div class="article-update-info">
+                <div class="text-capitalize">
+                    <a>
+                        <i class="fa fa-user"></i> {{ items.0.created_by_join }}
+                    </a>
+                </div>
+                <div class="text-capitalize">
+                    <i class="fa fa-clock-o"></i> {{ items.0.date_created|date('d M Y H:i') }}
+                </div>
+                <div class="text-capitalize pull-right">
+                    <a>
+                        <i class="fa fa-comments"></i> Comments (2)
+                    </a>
+                </div>
+            </div>
+
+            <div class="clearfix"></div>
+            <div class="cms-article-content">
+                <p>
+                    {{ items.0.article|striptags|truncate(250)|raw }}
+                </p>
+            </div>   
+        </div>
+
+        <div class="col-sm-6">
+            <div class="cms-article-img-wrapper">
+                <img src="{{ resized_image(items.0.article_image.file,300,300 ) }}" alt="{{ items.0.title }}" title="{{ items.0.title }}" align="left">
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+</div>
+
+
+<div class="cms-articles">
+    {% if items|length > 0 %}
+        {% for key,item in items %}
+
+            {% set item_url = generate_url('cms.articles.detail', {'id':item.id}) %}
+
+            {% if key %}
+                {% set div_row_begin = '<div class="cms-row-article">' %}
+                {% set div_row_end = '</div>' %}
+
+                {% if key%2 %}
+                    {{ div_row_begin|raw }}
+                {% endif %} 
+
+                <div class="col-sm-6">
+                    <div class="cms-article">
+
+                        <div class="cms-article-title">
+                            <a href="{{ item_url }}" title='{{ item.title }}'>
+                                {{ item.title }}
+                            </a>
+                        </div>
+
+                        <div class="cms-article-img-wrapper">
+                            <a href="{{ item_url }}" title='{{ item.title }}'>
+                                <img src="{{ resized_image(item.article_image.file,300,300) }}" alt="{{ item.title }}"  title="{{ item.title }}">
+                            </a>
+                        </div>
+
+                        <div class="article-update-info">
+                            <div class="text-capitalize">
+                                <a>
+                                    <i class="fa fa-user"></i> {{ item.created_by_join }}
+                                </a>
+                            </div>
+                            <div class="text-capitalize">
+                                <i class="fa fa-clock-o"></i> {{ items.0.date_created|date('d M Y H:i') }}
+                            </div>
+                            <div class="text-capitalize pull-right">
+                                <a>
+                                    <i class="fa fa-comments"></i> Comments (2)
+                                </a>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+
+                {% if not key%2 or key+1 == items|length  %}
+                    {{ div_row_end|raw }}
+                {% endif %}
+
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+</div>
+
+<div class="clearfix"></div>
+
+{% include "items.pagination.twig"%}
+
+<div class="clearfix"></div>

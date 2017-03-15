@@ -1,0 +1,10 @@
+{
+    "name": "issuestracker",
+    "title": "Issuestracker Listing",
+    "explanation": "Issuestracker Listing",
+    "description": "Issuestracker Listing",
+    "version": 1,
+    "icon": "assets\/system\/addons\/issuestracker\/icon.png",
+    "extension": "addon",
+    "path": "system\/addons\/issuestracker\/"
+}

@@ -1,0 +1,35 @@
+{# empty Twig template #}
+<div class="col-md-12">
+    <div class="col-md-3">
+        <ul class="nav nav-pills nav-stacked">
+            <li class="active">
+                <a href="#access_positions_snippet" data-toggle="tab" title='Positions'>
+                    Positions
+                </a>
+            </li>
+            <li>
+                <a href="#access_paths_snippet" data-toggle="tab" title='Application Paths'>
+                    Application Paths
+                </a>
+            </li>
+            <li>
+                <a href="#access_userright_snippet" data-toggle="tab" title='User Righ'>
+                    User Right
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div class="col-md-9">
+        <div class="tab-content">
+            <div class="tab-pane active" id="access_positions_snippet">
+                {% include "snippet.access.positions.twig" %}
+            </div>
+            <div class="tab-pane" id="access_paths_snippet">
+                {% include "snippet.access.paths.twig" %} 
+            </div>
+            <div class="tab-pane" id="access_userright_snippet">
+                {% include "snippet.access.userright.twig" %}
+            </div>
+        </div>
+    </div>
+</div>

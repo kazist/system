@@ -1,0 +1,35 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Aug 30, 2014, 2:53:11 PM
+    Author     : Dedan
+*/
+
+.homepage-group .homepage{
+    float: right;
+}
+
+.allpages-group .allpages{
+    float: right;
+}
+
+.extensionpages-group .extensionpages{
+    float: right;
+}
+
+.published-group .published{
+    float: right;
+}
+
+.show_title-group .show_title{
+    float: right;
+}
+/*;display:inline-block;margin-right:10px;*/
+.snippet_access_positions li{float: left; width: 50%}
+
+.snippet_access_paths li.subset{float: left;width:220px;}
+.snippet_access_paths li.component, .snippet_access_paths li.application{clear:both;}
+.snippet_access_paths li.component{border-bottom: 1px solid #ccc; margin-bottom: 5px; padding-bottom:5px;}

@@ -1,0 +1,92 @@
+{
+    "frontend": [{
+            "title": "Menu List",
+            "description": "Management of Menu.",
+            "controller": "System\\Addons\\Menu\\Controllers\\MenuController::indexAction",
+            "permissions": "can_view, can_viewown",
+            "unique_name": "system.addons.menu",
+            "route": "system/addons/menu",
+            "arguments": "",
+            "keywords": "latest, blog, list, addons",
+            "priority": "0.5",
+            "changefreq": "weekly",
+            "login_required": 0,
+            "roles": {
+                "SUPER_ADMIN": ["can_view", "can_viewown"],
+                "ADMIN": ["can_view", "can_viewown"],
+                "MODERATOR": ["can_view", "can_viewown"],
+                "USER": ["can_view", "can_viewown"]
+            }
+        }],
+    "backend": [{
+            "title": "General Tasks",
+            "description": "General Tasks.",
+            "controller": "Jobs\\Addons\\Menu\\Code\\Controllers\\Admin\\MenuController::taskAction",
+            "unique_name": "admin.system.addons.menu.task",
+            "route": "admin/system/addons/menu/task",
+            "permissions": "can_add, can_write, can_writeown",
+            "arguments": "",
+            "keywords": "candidate, task",
+            "priority": "0.5",
+            "changefreq": "weekly",
+            "login_required": 1,
+            "roles": {
+                "SUPER_ADMIN": ["can_add", "can_write", "can_writeown"],
+                "ADMIN": ["can_add", "can_write", "can_writeown"]
+            }
+        }, {
+            "title": "Menu List",
+            "description": "Backend Menu.",
+            "controller": "System\\Addons\\Menu\\Controllers\\Admin\\MenuController::indexAction",
+            "permissions": "can_view, can_viewown",
+            "unique_name": "admin.system.addons.menu",
+            "route": "admin/system/addons/menu",
+            "arguments": "",
+            "keywords": "latest, blog, list, addons",
+            "priority": "0.5",
+            "changefreq": "weekly",
+            "login_required": 0,
+            "roles": {
+                "SUPER_ADMIN": ["can_view", "can_viewown"],
+                "ADMIN": ["can_view", "can_viewown"],
+                "MODERATOR": ["can_view", "can_viewown"],
+                "USER": ["can_view", "can_viewown"]
+            }
+        }, {
+            "title": "Backend Quick Menu",
+            "description": "Backend Quick Menu.",
+            "controller": "System\\Addons\\Menu\\Controllers\\Admin\\MenuController::quickmenuAction",
+            "unique_name": "admin.system.addons.quickmenu",
+            "route": "admin/system/addons/quickmenu",
+            "permissions": "can_view, can_viewown",
+            "arguments": "",
+            "keywords": "latest, blog, list, addons",
+            "priority": "0.5",
+            "changefreq": "weekly",
+            "login_required": 0,
+            "roles": {
+                "SUPER_ADMIN": ["can_view", "can_viewown"],
+                "ADMIN": ["can_view", "can_viewown"],
+                "MODERATOR": ["can_view", "can_viewown"],
+                "USER": ["can_view", "can_viewown"]
+            }
+        }, {
+            "title": "Backend Icon Menu",
+            "description": "Backend Icon Menu.",
+            "controller": "System\\Addons\\Menu\\Controllers\\Admin\\MenuController::iconmenuAction",
+            "unique_name": "admin.system.addons.iconmenu",
+            "route": "admin/system/addons/iconmenu",
+            "permissions": "can_view, can_viewown",
+            "arguments": "",
+            "keywords": "latest, blog, list, addons",
+            "priority": "0.5",
+            "changefreq": "weekly",
+            "login_required": 0,
+            "roles": {
+                "SUPER_ADMIN": ["can_view", "can_viewown"],
+                "ADMIN": ["can_view", "can_viewown"],
+                "MODERATOR": ["can_view", "can_viewown"],
+                "USER": ["can_view", "can_viewown"]
+            }
+        }]
+} 	

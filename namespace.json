@@ -1,0 +1,70 @@
+{
+    "SystemRoutes": {
+        "namespace": "System\\Routes",
+        "controller": "RoutesController"
+    },
+    "SystemExtensions": {
+        "namespace": "System\\Extensions",
+        "controller": "ExtensionsController"
+    },
+    "SystemCrons": {
+        "namespace": "System\\Crons",
+        "controller": "CronsController"
+    },
+    "SystemLanguages": {
+        "namespace": "System\\Languages",
+        "controller": "LanguagesController"
+    },
+    "SystemSubsets": {
+        "namespace": "System\\Subsets",
+        "controller": "SubsetsController"
+    },
+    "SystemSettings": {
+        "namespace": "System\\Settings",
+        "controller": "SettingsController"
+    },
+    "SystemFlexviews": {
+        "namespace": "System\\Flexviews",
+        "controller": "FlexviewsController"
+    },
+    "SystemFlexviewsPositions": {
+        "namespace": "System\\Flexviews\\Positions",
+        "controller": "PositionsController"
+    },
+    "SystemRoutesFlexviews": {
+        "namespace": "System\\Routes\\Flexviews",
+        "controller": "FlexviewsController"
+    },
+    "SystemRoutesPermissions": {
+        "namespace": "System\\Routes\\Permissions",
+        "controller": "PermissionsController"
+    },
+    "SystemExtensionsUpdates": {
+        "namespace": "System\\Extensions\\Updates",
+        "controller": "UpdatesController"
+    },
+    "SystemExtensionsRepositories": {
+        "namespace": "System\\Extensions\\Repositories",
+        "controller": "RepositoriesController"
+    },
+    "SystemTemplates": {
+        "namespace": "System\\Templates",
+        "controller": "TemplatesController"
+    },
+    "SystemMenus": {
+        "namespace": "System\\Menus",
+        "controller": "MenusController"
+    },
+    "SystemMenusCategories": {
+        "namespace": "System\\Menus\\Categories",
+        "controller": "CategoriesController"
+    },
+    "SystemPages": {
+        "namespace": "System\\Pages",
+        "controller": "PagesController"
+    },
+    "SystemListeners": {
+        "namespace": "System\\Listeners",
+        "controller": "ListenersController"
+    }
+}

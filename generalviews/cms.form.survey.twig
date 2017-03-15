@@ -1,0 +1,8 @@
+
+{% set path_set = addTwigPath( "applications.Surveys.generalviews.survey") %}
+
+<br>
+<div class="article-survey-form">
+    {% include "survey.new.form.twig" ignore missing with {'survey_id': item.survey_id, 'hide_on_new': true} %}
+</div>
+

@@ -1,0 +1,141 @@
+{
+    "backend": [{
+            "title": "General Tasks",
+            "description": "General Tasks.",
+            "controller": "System\\Routes\\Flexviews\\Code\\Controllers\\Admin\\RoutesController::taskAction",
+            "unique_name": "admin.system.routes.flexviews.task",
+            "route": "admin/system/routes/flexviews/task",
+            "permissions": "can_add, can_write, can_writeown",
+            "arguments": "",
+            "keywords": "flexviews, task",
+            "priority": "0.5",
+            "changefreq": "weekly",
+            "login_required": 1,
+            "roles": {
+                "SUPER_ADMIN": ["can_add", "can_write", "can_writeown"],
+                "ADMIN": ["can_add", "can_write", "can_writeown"]
+            }
+        }, {
+            "title": "Route List",
+            "description": "Management of Routes.",
+            "controller": "System\\Routes\\Flexviews\\Code\\Controllers\\Admin\\RoutesController::indexAction",
+            "permissions": "can_view, can_viewown",
+            "unique_name": "admin.system.routes.flexviews",
+            "route": "admin/system/routes/flexviews",
+            "arguments": "",
+            "keywords": "flexview, list",
+            "priority": "0.5",
+            "changefreq": "weekly",
+            "login_required": 1,
+            "roles": {
+                "SUPER_ADMIN": ["can_view", "can_viewown"],
+                "ADMIN": ["can_view", "can_viewown"]
+            }
+        }, {
+            "title": "Add Route ",
+            "description": "Add Route .",
+            "controller": "System\\Routes\\Flexviews\\Code\\Controllers\\Admin\\RoutesController::addAction",
+            "unique_name": "admin.system.routes.flexviews.add",
+            "route": "admin/system/routes/flexviews/add",
+            "permissions": "can_add",
+            "arguments": {},
+            "keywords": "flexview,add",
+            "priority": "0.5",
+            "changefreq": "weekly",
+            "login_required": 1,
+            "roles": {
+                "SUPER_ADMIN": ["can_add"],
+                "ADMIN": ["can_add"]
+            }
+        }, {
+            "title": "Edit Route {{ item.name }}",
+            "description": "Edit Route {{ item.name }}.",
+            "controller": "System\\Routes\\Flexviews\\Code\\Controllers\\Admin\\RoutesController::editAction",
+            "unique_name": "admin.system.routes.flexviews.edit",
+            "route": "admin/system/routes/flexviews/edit/{id}",
+            "permissions": "can_add, can_write, can_writeown",
+            "arguments": {
+                "id": null
+            },
+            "keywords": "flexview, edit, {{ item.name }}",
+            "priority": "0.5",
+            "changefreq": "weekly",
+            "login_required": 1,
+            "roles": {
+                "SUPER_ADMIN": ["can_add", "can_write", "can_writeown"],
+                "ADMIN": ["can_add", "can_write", "can_writeown"]
+            }
+        }, {
+            "title": "Route Detail: {{ item.name }}",
+            "description": "Route Detail: {{ item.name }}",
+            "controller": "System\\Routes\\Flexviews\\Code\\Controllers\\Admin\\RoutesController::detailAction",
+            "unique_name": "admin.system.routes.flexviews.detail",
+            "route": "admin/system/routes/flexviews/detail/{id}",
+            "permissions": "can_view, can_viewown",
+            "arguments": {
+                "id": null
+            },
+            "keywords": "flexview, detail, {{ item.name }}",
+            "priority": "0.5",
+            "changefreq": "weekly",
+            "login_required": 1,
+            "roles": {
+                "SUPER_ADMIN": ["can_view", "can_viewown"],
+                "ADMIN": ["can_view", "can_viewown"]
+            }
+        }, {
+            "title": "Route Delete: {{ item.name }}",
+            "description": "Route Delete: {{ item.name }}",
+            "controller": "System\\Routes\\Flexviews\\Code\\Controllers\\Admin\\RoutesController::deleteAction",
+            "unique_name": "admin.system.routes.flexviews.delete",
+            "route": "admin/system/routes/flexviews/delete/{id}",
+            "permissions": "can_delete, can_deleteown",
+            "arguments": {
+                "id": null
+            },
+            "keywords": "flexview, delete, {{ item.name }}",
+            "priority": "0.5",
+            "changefreq": "weekly",
+            "login_required": 1,
+            "roles": {
+                "SUPER_ADMIN": ["can_delete", "can_deleteown"],
+                "ADMIN": ["can_delete", "can_deleteown"]
+            }
+        }, {
+            "title": "Route Save: {{ item.name }}",
+            "description": "Route Save: {{ item.name }}",
+            "controller": "System\\Routes\\Flexviews\\Code\\Controllers\\Admin\\RoutesController::saveAction",
+            "unique_name": "admin.system.routes.flexviews.save",
+            "route": "admin/system/routes/flexviews/save",
+            "permissions": "can_add, can_write, can_writeown",
+            "arguments": {
+                "id": null
+            },
+            "keywords": "flexview, save, {{ item.name }}",
+            "priority": "0.5",
+            "changefreq": "weekly",
+            "login_required": 1,
+            "roles": {
+                "SUPER_ADMIN": ["can_add", "can_write", "can_writeown"],
+                "ADMIN": ["can_add", "can_write", "can_writeown"]
+            }
+        }, {
+            "title": "Route Install: {{ item.name }}",
+            "description": "Route Install: {{ item.name }}",
+            "controller": "System\\Routes\\Flexviews\\Code\\Controllers\\Admin\\RoutesController::installAction",
+            "unique_name": "admin.system.routes.flexviews.install",
+            "route": "admin/system/routes/flexviews/install",
+            "permissions": "can_add, can_write, can_writeown",
+            "arguments": {
+                "path": null
+            },
+            "keywords": "flexview, Install, {{ item.name }}",
+            "priority": "0.5",
+            "changefreq": "weekly",
+            "login_required": 1,
+            "roles": {
+                "SUPER_ADMIN": ["can_add", "can_write", "can_writeown"],
+                "ADMIN": ["can_add", "can_write", "can_writeown"]
+            }
+        }]
+} 	

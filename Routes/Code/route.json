@@ -1,0 +1,160 @@
+{
+    "frontend": [{
+            "title": "cron system route",
+            "description": "cron system route",
+            "controller": "System\\Routes\\Code\\Controllers\\RoutesController::processurlAction",
+            "unique_name": "system.routes.processurl",
+            "route": "system/routes/processurl",
+            "permissions": "can_view, can_viewown",
+            "arguments": [],
+            "keywords": "system, processurl",
+            "priority": "0.5",
+            "changefreq": "weekly",
+            "login_required": 0
+        }, {
+            "title": "cron system route",
+            "description": "cron system route",
+            "controller": "System\\Routes\\Code\\Controllers\\RoutesController::fetchlinksAction",
+            "unique_name": "system.routes.fetchlinks",
+            "route": "system/routes/fetchlinks",
+            "permissions": "can_view, can_viewown",
+            "arguments": [],
+            "keywords": "system, fetchlinks",
+            "priority": "0.5",
+            "changefreq": "weekly",
+            "login_required": 0
+        }, {
+            "title": "cron system route",
+            "description": "cron system route",
+            "controller": "System\\Routes\\Code\\Controllers\\RoutesController::processsitemapAction",
+            "unique_name": "system.routes.processsitemap",
+            "route": "system/routes/processsitemap",
+            "permissions": "can_view, can_viewown",
+            "arguments": [],
+            "keywords": "system, processsitemap",
+            "priority": "0.5",
+            "changefreq": "weekly",
+            "login_required": 0
+        }],
+    "backend": [{
+            "title": "General Tasks",
+            "description": "General Tasks.",
+            "controller": "System\\Routes\\Code\\Controllers\\Admin\\RoutesController::taskAction",
+            "unique_name": "admin.system.routes.task",
+            "route": "admin/system/routes/task",
+            "permissions": "can_add, can_write, can_writeown",
+            "arguments": "",
+            "keywords": "routes, task",
+            "priority": "0.5",
+            "changefreq": "weekly",
+            "login_required": 1,
+            "roles": {
+                "SUPER_ADMIN": ["can_add", "can_write", "can_writeown"],
+                "ADMIN": ["can_add", "can_write", "can_writeown"]
+            }
+        }, {
+            "title": "Route List",
+            "description": "Management of Routes.",
+            "controller": "System\\Routes\\Code\\Controllers\\Admin\\RoutesController::indexAction",
+            "permissions": "can_view, can_viewown",
+            "unique_name": "admin.system.routes",
+            "route": "admin/system/routes",
+            "arguments": "",
+            "keywords": "route, list",
+            "priority": "0.5",
+            "changefreq": "weekly",
+            "login_required": 1,
+            "roles": {
+                "SUPER_ADMIN": ["can_view", "can_viewown"],
+                "ADMIN": ["can_view", "can_viewown"]
+            }
+        }, {
+            "title": "Add Route ",
+            "description": "Add Route .",
+            "controller": "System\\Routes\\Code\\Controllers\\Admin\\RoutesController::addAction",
+            "unique_name": "admin.system.routes.add",
+            "route": "admin/system/routes/add",
+            "permissions": "can_add",
+            "arguments": {},
+            "keywords": "route, add",
+            "priority": "0.5",
+            "changefreq": "weekly",
+            "login_required": 1,
+            "roles": {
+                "SUPER_ADMIN": ["can_add"],
+                "ADMIN": ["can_add"]
+            }
+        }, {
+            "title": "Edit Route {{ item.name }}",
+            "description": "Edit Route {{ item.name }}.",
+            "controller": "System\\Routes\\Code\\Controllers\\Admin\\RoutesController::editAction",
+            "unique_name": "admin.system.routes.edit",
+            "route": "admin/system/routes/edit/{id}",
+            "permissions": "can_add, can_write, can_writeown",
+            "arguments": {
+                "id": null
+            },
+            "keywords": "route, list, {{ item.name }}",
+            "priority": "0.5",
+            "changefreq": "weekly",
+            "login_required": 1,
+            "roles": {
+                "SUPER_ADMIN": ["can_add", "can_write", "can_writeown"],
+                "ADMIN": ["can_add", "can_write", "can_writeown"]
+            }
+        }, {
+            "title": "Route Detail: {{ item.name }}",
+            "description": "Route Detail: {{ item.name }}",
+            "controller": "System\\Routes\\Code\\Controllers\\Admin\\RoutesController::detailAction",
+            "unique_name": "admin.system.routes.detail",
+            "route": "admin/system/routes/detail/{id}",
+            "permissions": "can_view, can_viewown",
+            "arguments": {
+                "id": null
+            },
+            "keywords": "route, list, {{ item.name }}",
+            "priority": "0.5",
+            "changefreq": "weekly",
+            "login_required": 1,
+            "roles": {
+                "SUPER_ADMIN": ["can_view", "can_viewown"],
+                "ADMIN": ["can_view", "can_viewown"]
+            }
+        }, {
+            "title": "Route Delete: {{ item.name }}",
+            "description": "Route Delete: {{ item.name }}",
+            "controller": "System\\Routes\\Code\\Controllers\\Admin\\RoutesController::deleteAction",
+            "unique_name": "admin.system.routes.delete",
+            "route": "admin/system/routes/delete/{id}",
+            "permissions": "can_delete, can_deleteown",
+            "arguments": {
+                "id": null
+            },
+            "keywords": "route, delete, {{ item.name }}",
+            "priority": "0.5",
+            "changefreq": "weekly",
+            "login_required": 1,
+            "roles": {
+                "SUPER_ADMIN": ["can_delete", "can_deleteown"],
+                "ADMIN": ["can_delete", "can_deleteown"]
+            }
+        }, {
+            "title": "Route Save: {{ item.name }}",
+            "description": "Route Save: {{ item.name }}",
+            "controller": "System\\Routes\\Code\\Controllers\\Admin\\RoutesController::saveAction",
+            "unique_name": "admin.system.routes.save",
+            "route": "admin/system/routes/save",
+            "permissions": "can_add, can_write, can_writeown",
+            "arguments": {
+                "id": null
+            },
+            "keywords": "route, save, {{ item.name }}",
+            "priority": "0.5",
+            "changefreq": "weekly",
+            "login_required": 1,
+            "roles": {
+                "SUPER_ADMIN": ["can_add", "can_write", "can_writeown"],
+                "ADMIN": ["can_add", "can_write", "can_writeown"]
+            }
+        }]
+} 	

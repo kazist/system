@@ -1,0 +1,148 @@
+System\Flexviews\Code\Tables\Flexviews:
+  table: system_flexviews
+  type: entity
+  id:
+    id:
+      type: integer
+      generator: { strategy: AUTO }
+  fields:
+    unique_name:
+      name: unique_name
+      type: string
+      length: 255
+      nullable: false
+    title:
+      name: title
+      type: string
+      length: '255'
+      nullable: false
+    show_title:
+      name: show_title
+      type: integer
+      length: 11
+      nullable: false
+    icon:
+      name: icon
+      type: string
+      length: 255
+      nullable: true
+    homepage:
+      name: homepage
+      type: integer
+      length: 11
+      nullable: true
+    allpages:
+      name: allpages
+      type: integer
+      length: 11
+      nullable: true
+    extensionpages:
+      name: extensionpages
+      type: integer
+      length: 11
+      nullable: true
+    viewside:
+      name: viewside
+      type: string
+      length: 255
+      nullable: false
+    class:
+      name: class
+      type: string
+      length: 255
+      nullable: true
+    extension_path:
+      name: extension_path
+      type: string
+      length: 255
+      nullable: true
+    extension_id:
+      name: extension_id
+      type: integer
+      length: '11'
+      nullable: false
+    suffix_content:
+      name: suffix_content
+      type: text
+      nullable: true
+    prefix_content:
+      name: prefix_content
+      type: text
+      nullable: true
+    main_content:
+      name: main_content
+      type: text
+      nullable: true
+    version:
+      name: version
+      type: integer
+      length: '11'
+      nullable: true
+    explanation:
+      name: explanation
+      type: string
+      length: '255'
+      nullable: true
+    description:
+      name: description
+      type: string
+      length: '255'
+      nullable: true
+    render:
+      name: render
+      type: string
+      length: 255
+      nullable: false
+    twig_file:
+      name: twig_file
+      type: string
+      length: 255
+      nullable: true
+    ordering:
+      name: ordering
+      type: integer
+      length: 11
+      nullable: true
+    published:
+      name: published
+      type: integer
+      length: 11
+      nullable: true
+    params:
+      name: params
+      type: text
+      nullable: true
+    setting:
+      name: setting
+      type: text
+      nullable: true
+    created_by:
+      name: created_by
+      type: integer
+      length: 11
+      nullable: false
+    date_created:
+      name: date_created
+      type: datetime
+      nullable: false
+    modified_by:
+      name: modified_by
+      type: integer
+      length: 11
+      nullable: false
+    date_modified:
+      name: date_modified
+      type: datetime
+      nullable: false
+  indexes:
+    unique_name_index:
+      columns: [unique_name]
+    extension_id_index:
+      columns: [extension_id]
+  lifecycleCallbacks:
+    prePersist:
+      - onPrePersist
+      - onPrePersistCallbacks
+    preUpdate:
+      - onPreUpdate
+      - onPreUpdateCallbacks

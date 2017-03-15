@@ -1,0 +1,9 @@
+{
+    "name": "system",
+    "title": "System",
+    "icon": "assets\/system\/routes\/icon.png",
+    "extension": "component",
+    "path": "system\/",
+    "description": "System General Functionality",
+    "version": "1"
+}

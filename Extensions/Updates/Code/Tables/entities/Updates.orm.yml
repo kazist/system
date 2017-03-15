@@ -1,0 +1,47 @@
+System\Extensions\Updates\Code\Tables\Updates:
+  table: system_extensions_updates
+  type: entity
+  id:
+    id:
+      type: integer
+      generator: { strategy: AUTO }
+  fields:
+    extension_id:
+      name: extension_id
+      type: integer
+      length: 11
+      nullable: false
+    version:
+      name: version
+      type: string
+      length: 255
+      nullable: false
+    change_log:
+      name: change_log
+      type: text
+      nullable: false
+    created_by:
+      name: created_by
+      type: integer
+      length: 11
+      nullable: false
+    date_created:
+      name: date_created
+      type: datetime
+      nullable: false
+    modified_by:
+      name: modified_by
+      type: integer
+      length: 11
+      nullable: false
+    date_modified:
+      name: date_modified
+      type: datetime
+      nullable: false
+  lifecycleCallbacks:
+    prePersist:
+      - onPrePersist
+      - onPrePersistCallbacks
+    preUpdate:
+      - onPreUpdate
+      - onPreUpdateCallbacks

@@ -1,0 +1,24 @@
+{% import "form.macro.twig" as forms %}
+
+{% set parameters={'target':'blog', 'category_id':category_id} %}
+
+{% set general_contest = callFunction( "Cms.Contests.Code.Models.ContestsModel", 'getGeneralContest' ) %}
+{% set contest_list = callFunction( "Cms.Contests.Code.Models.ContestsModel", 'getContestList', parameters ) %}
+
+<div class="form-horizontal cms-contest">
+    {% if contest_list|length > 0 %}
+        <b>Submit to Contest</b>
+        <div class="cms-contest-list">
+            <input type="radio" name="form[contest_id]" value="{{ general_contest.id }}" {% if general_contest.id == item.contest_id%} checked {% endif%}> {{ general_contest.title }}<br>
+            or<br>
+            {% for contest in contest_list %}
+                <input type="radio" name="form[contest_id]" value="{{ contest.id }}"{% if contest.id == item.contest_id %} checked {% endif%}> {{ contest.title }}<br>
+            {% endfor %}
+
+        </div>
+    {% else %}
+        <br>
+        {{ forms.input('contest_id', 'yesno', item.title, 'Submit to Contest') }}
+    {% endif %}
+    <div class="clearfix"></div>
+</div>

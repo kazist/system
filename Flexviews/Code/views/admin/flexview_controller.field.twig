@@ -1,0 +1,55 @@
+
+{% import "form.macro.twig" as forms %}
+
+{% set item = get_context('item') %}
+{% set routes = get_context('routes') %}
+
+<div class="snippet_access_paths col-md-12">
+
+    <table class="table table-bordered table-condensed">
+        <thead>
+            <tr>
+                <th>Route</th>
+                <th>Show</th>
+                <th>Hide</th>
+            </tr>
+        </thead>
+        <tbody> 
+
+            {% if routes|length > 0 %}
+                {% for key,route in routes %}
+                    {% set route_id = route.id %}
+                    <tr>
+                        <td>{{ forms.input('routes.'~key~'.route', 'text', route.route) }}</td>
+                        <td>
+                            <input type="checkbox" name="form[routes][{{ key }}][visible]" value="1" {% if route.visible %}checked{% endif %}>
+                        </td>
+                        <td>
+                            <input type="checkbox" name="form[routes][{{ key }}][hidden]" value="1" {% if route.hidden %}checked{% endif %}>
+                        </td>
+                    </tr>
+                    {{ forms.input('routes.'~key~'.id', 'hidden', route.id) }}
+                    {{ forms.input('routes.'~key~'.flexview_id', 'hidden', item.id) }}
+                {% endfor %}
+            {% endif %}    
+
+            {% set start = routes|length %}
+            {% set end = routes|length + 2 %}
+
+            {% for x in start..end %}
+                <tr>
+                    <td>{{ forms.input('routes.'~x~'.route', 'text', default) }}</td>
+                    <td>
+                        <input type="checkbox" name="form[routes][{{ x }}][visible]" value="1">
+                    </td>
+                    <td>
+                        <input type="checkbox" name="form[routes][{{ x }}][hidden]" value="1">
+                    </td>
+                </tr>
+                {{ forms.input('routes.'~x~'.flexview_id', 'hidden', item.id) }}
+            {% endfor %}
+
+        </tbody>
+    </table>
+    <small>  Routes Examples <b>*</b>, <b> users.*</b>  or  <b>users.*.roles</b> </small>
+</div>

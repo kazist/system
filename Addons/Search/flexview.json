@@ -1,0 +1,45 @@
+[
+    {
+        "title": "Search List",
+        "show_title": "1",
+        "unique_name": "system.addons.search",
+        "icon": "fa-user",
+        "homepage": "0",
+        "allpages": "0",
+        "extensionpages": "1",
+        "viewside": "frontend",
+        "explanation": "",
+        "description": "",
+        "suffix_content": "",
+        "prefix_content": "",
+        "main_content": "",
+        "positions": ["sidebar"],
+        "setting": [{
+                "name": "theme",
+                "label": "Theme",
+                "type": "select",
+                "source": {
+                    "custom": [{
+                            "value": "default",
+                            "text": "default"
+                        }, {
+                            "value": "primary",
+                            "text": "primary"
+                        }, {
+                            "value": "success",
+                            "text": "success"
+                        }, {
+                            "value": "warning",
+                            "text": "warning"
+                        }, {
+                            "value": "danger",
+                            "text": "danger"
+                        }]
+                }
+            }, {
+                "name": "show_filter",
+                "label": "Show Filter",
+                "type": "yesno"
+            }]
+    }
+]

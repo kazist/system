@@ -1,0 +1,17 @@
+
+<div class="form-horizontal">
+    <br>
+    <div class="form-group opinion-group">
+        <label for="title" class="col-sm-3 control-label"></label>
+        <div class="col-sm-9 kazicode-form-field">
+            <div class="col-sm-6">
+                <label>Allow Commenting</label><br>
+                {{ forms.input('has_comment', 'yesno',  item.has_comment) }}
+            </div>
+            <div class="col-sm-6">
+                <label>Allow Opinion</label><br>
+                {{ forms.input('has_opinion', 'yesno',  item.has_opinion) }}
+            </div>
+        </div>
+    </div>
+</div>

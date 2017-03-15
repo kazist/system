@@ -1,0 +1,12 @@
+
+<ul>
+    {% if menus|length > 0 %}
+        {% for menu in menus %}
+            <li>
+                <a href="{{ web_base }}/{{ menu.url }}" title="{{ menu.title }}">
+                    {{ menu.title }}
+                </a>
+            </li>
+        {% endfor %}
+    {% endif %}
+</ul>

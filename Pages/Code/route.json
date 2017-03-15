@@ -1,0 +1,136 @@
+{
+    "frontend": [{
+            "title": "Page Detail",
+            "description": "Page Detail",
+            "controller": "System\\Pages\\Code\\Controllers\\PagesController::detailAction",
+            "unique_name": "system.pages.detail",
+            "route": "system/pages/detail",
+            "permissions": "can_view, can_viewown",
+            "arguments": {},
+            "keywords": "page, detail",
+            "priority": "0.5",
+            "changefreq": "weekly",
+            "login_required": 0
+        }],
+    "backend": [{
+            "title": "General Tasks",
+            "description": "General Tasks.",
+            "controller": "System\\Pages\\Code\\Controllers\\Admin\\PagesController::taskAction",
+            "unique_name": "admin.system.pages.task",
+            "route": "admin/system/pages/task",
+            "permissions": "can_add, can_write, can_writeown",
+            "arguments": "",
+            "keywords": "pages, task",
+            "priority": "0.5",
+            "changefreq": "weekly",
+            "login_required": 1,
+            "roles": {
+                "SUPER_ADMIN": ["can_add", "can_write", "can_writeown"],
+                "ADMIN": ["can_add", "can_write", "can_writeown"]
+            }
+        }, {
+            "title": "Page List",
+            "description": "Management of Pages.",
+            "controller": "System\\Pages\\Code\\Controllers\\Admin\\PagesController::indexAction",
+            "permissions": "can_view, can_viewown",
+            "unique_name": "admin.system.pages",
+            "route": "admin/system/pages",
+            "arguments": "",
+            "keywords": "page, list",
+            "priority": "0.5",
+            "changefreq": "weekly",
+            "login_required": 1,
+            "roles": {
+                "SUPER_ADMIN": ["can_view", "can_viewown"],
+                "ADMIN": ["can_view", "can_viewown"]
+            }
+        }, {
+            "title": "Add Page ",
+            "description": "Add Page .",
+            "controller": "System\\Pages\\Code\\Controllers\\Admin\\PagesController::addAction",
+            "unique_name": "admin.system.pages.add",
+            "route": "admin/system/pages/add",
+            "permissions": "can_add",
+            "arguments": {},
+            "keywords": "page, add",
+            "priority": "0.5",
+            "changefreq": "weekly",
+            "login_required": 1,
+            "roles": {
+                "SUPER_ADMIN": ["can_add"],
+                "ADMIN": ["can_add"]
+            }
+        }, {
+            "title": "Edit Page {{ item.name }}",
+            "description": "Edit Page {{ item.name }}.",
+            "controller": "System\\Pages\\Code\\Controllers\\Admin\\PagesController::editAction",
+            "unique_name": "admin.system.pages.edit",
+            "route": "admin/system/pages/edit/{id}",
+            "permissions": "can_add, can_write, can_writeown",
+            "arguments": {
+                "id": null
+            },
+            "keywords": "page, edit, {{ item.name }}",
+            "priority": "0.5",
+            "changefreq": "weekly",
+            "login_required": 1,
+            "roles": {
+                "SUPER_ADMIN": ["can_add", "can_write", "can_writeown"],
+                "ADMIN": ["can_add", "can_write", "can_writeown"]
+            }
+        }, {
+            "title": "Page Detail: {{ item.name }}",
+            "description": "Page Detail: {{ item.name }}",
+            "controller": "System\\Pages\\Code\\Controllers\\Admin\\PagesController::detailAction",
+            "unique_name": "admin.system.pages.detail",
+            "route": "admin/system/pages/detail/{id}",
+            "permissions": "can_view, can_viewown",
+            "arguments": {
+                "id": null
+            },
+            "keywords": "page, detail, {{ item.name }}",
+            "priority": "0.5",
+            "changefreq": "weekly",
+            "login_required": 1,
+            "roles": {
+                "SUPER_ADMIN": ["can_view", "can_viewown"],
+                "ADMIN": ["can_view", "can_viewown"]
+            }
+        }, {
+            "title": "Page Delete: {{ item.name }}",
+            "description": "Page Delete: {{ item.name }}",
+            "controller": "System\\Pages\\Code\\Controllers\\Admin\\PagesController::deleteAction",
+            "unique_name": "admin.system.pages.delete",
+            "route": "admin/system/pages/delete/{id}",
+            "permissions": "can_delete, can_deleteown",
+            "arguments": {
+                "id": null
+            },
+            "keywords": "page, delete, {{ item.name }}",
+            "priority": "0.5",
+            "changefreq": "weekly",
+            "login_required": 1,
+            "roles": {
+                "SUPER_ADMIN": ["can_delete", "can_deleteown"],
+                "ADMIN": ["can_delete", "can_deleteown"]
+            }
+        }, {
+            "title": "Page Save: {{ item.name }}",
+            "description": "Page Save: {{ item.name }}",
+            "controller": "System\\Pages\\Code\\Controllers\\Admin\\PagesController::saveAction",
+            "unique_name": "admin.system.pages.save",
+            "route": "admin/system/pages/save",
+            "permissions": "can_add, can_write, can_writeown",
+            "arguments": {
+                "id": null
+            },
+            "keywords": "page, save, {{ item.name }}",
+            "priority": "0.5",
+            "changefreq": "weekly",
+            "login_required": 1,
+            "roles": {
+                "SUPER_ADMIN": ["can_add", "can_write", "can_writeown"],
+                "ADMIN": ["can_add", "can_write", "can_writeown"]
+            }
+        }]
+} 	

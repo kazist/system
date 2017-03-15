@@ -1,0 +1,113 @@
+System\Crons\Code\Tables\Crons:
+  table: system_crons
+  type: entity
+  id:
+    id:
+      type: integer
+      generator: { strategy: AUTO }
+  fields:
+    subset_id:
+      name: subset_id
+      type: integer
+      length: '11'
+      nullable: true
+    unique_name:
+      name: unique_name
+      type: string
+      length: 255
+    controller:
+      name: controller
+      type: string
+      length: 255
+      nullable: false
+    function:
+      name: function
+      type: string
+      length: 255
+      nullable: false
+    minute:
+      name: minute
+      type: string
+      length: 255
+      nullable: true
+    hour:
+      name: hour
+      type: string
+      length: 255
+      nullable: true
+    day_of_month:
+      name: day_of_month
+      type: string
+      length: 255
+      nullable: true
+    month:
+      name: month
+      type: string
+      length: 255
+      nullable: true
+    day_of_week:
+      name: day_of_week
+      type: string
+      length: 255
+      nullable: true
+    year:
+      name: year
+      type: string
+      length: 255
+      nullable: true
+    completed_running:
+      name: completed_running
+      type: integer
+      length: 11
+      nullable: true
+    next_run_time:
+      name: next_run_time
+      type: datetime
+      nullable: true
+    is_new:
+      name: is_new
+      type: integer
+      length: 11
+      nullable: true
+    extension_path:
+      name: extension_path
+      type: string
+      length: 255
+      nullable: false
+    published:
+      name: published
+      type: integer
+      length: 11
+      nullable: true
+    created_by:
+      name: created_by
+      type: integer
+      length: 11
+      nullable: false
+    date_created:
+      name: date_created
+      type: datetime
+      nullable: false
+    modified_by:
+      name: modified_by
+      type: integer
+      length: 11
+      nullable: false
+    date_modified:
+      name: date_modified
+      type: datetime
+      nullable: false
+  indexes:
+    subset_id_index:
+      columns: [subset_id]
+    controller_index:
+      columns: [controller]
+    function_index:
+      columns: [function]
+  lifecycleCallbacks:
+    prePersist:
+      - onPrePersist
+      - onPrePersistCallbacks
+    preUpdate:
+      - onPreUpdate
+      - onPreUpdateCallbacks

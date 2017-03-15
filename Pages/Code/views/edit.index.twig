@@ -1,0 +1,74 @@
+{# empty Twig template #}
+
+{% import "form.macro.twig" as forms %}
+
+{{ set_assets('applications/Cms/assets/css/article.css') }}
+{{ set_assets('applications/Cms/assets/js/article.js') }}
+
+<h1 class="component-header">Add/Edit Article</h1>
+<hr>
+
+<form id="main-edit-form" action="{{ generate_url('cms.articles.save') }}" class="form-horizontal" method="post" role="form" enctype="multipart/form-data">
+    <div class="add-edit-blog">
+        <div class="well well-sm">Blog Detail </div>
+
+        <div class="article-detail-form">
+            <div>
+                <div class="col-sm-6">
+                    {{ forms.input('title', 'text', item.title, 'Title') }}
+                    {{ forms.input('category_id', 'select', item.category_id, 'Category', null, null, null, null, category_options) }}
+
+                </div>
+                <div class="col-sm-6">
+                    {{ forms.input('image', 'file', item.image) }}
+                    <img src="{{ resized_image(item.article_image.file, 48,48) }}" alt="{{ item.title }}" title="{{ item.title }}" width='48px'>
+                </div>
+            </div>
+
+            <div class="clearfix"></div>
+            <div>
+                {{ forms.input('article', 'editor', item.article, 'Article Content') }}
+                {{ forms.input('short_description', 'textarea', item.short_description, 'Short Description') }}
+            </div>
+
+            {{ forms.input('survey_id', 'hidden', item.survey_id) }}
+        </div>
+
+        <div class="article-form-tabs">
+            <!-- Nav tabs -->
+            <ul class="nav nav-tabs" role="tablist">
+                <li role="presentation" class="active publishing_date_tab"><a href="#publishing_date" aria-controls="publishing_date" role="tab" data-toggle="tab" title='Publishing detail'>Publishing detail</a></li>
+                <li role="presentation" class="opinion_tab"><a href="#opinion" aria-controls="opinion" role="tab" data-toggle="tab" title='Reader Opinion'>Reader Opinion</a></li>
+                <li role="presentation" class="survey_tab"><a href="#survey" aria-controls="survey" role="tab" data-toggle="tab" title='Survey'>Survey</a></li>
+            </ul>
+
+            <!-- Tab panes -->
+            <div class="tab-content">
+
+                <div role="tabpanel" class="tab-pane active" id="publishing_date">
+                    {% include "cms.form.publishing.twig" ignore missing %}  
+                </div>
+
+                <div role="tabpanel" class="tab-pane " id="opinion">
+                    {% include "cms.form.opinion.twig" ignore missing %}  
+                </div>
+
+                <div role="tabpanel" class="tab-pane " id="survey">
+                    {% include "cms.form.survey.twig" ignore missing %}  
+                </div>
+
+            </div>
+        </div>
+
+        {{ forms.input('id', 'hidden', item.id) }}
+
+        <a class="btn btn-danger btn-sm" href="{{ generate_url('cms.articles') }}" title='Cancel'>Cancel</a>
+        <input class="btn btn-success btn-sm" name="id" type="submit" value="Save">
+
+        <br>
+        <br>
+    </div>
+
+    {{ forms.input('_token' ) }} 
+
+</form>

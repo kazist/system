@@ -1,0 +1,141 @@
+{
+    "backend": [{
+            "title": "General Tasks",
+            "description": "General Tasks.",
+            "controller": "System\\Templates\\Code\\Controllers\\Admin\\TemplatesController::taskAction",
+            "unique_name": "admin.system.templates.task",
+            "route": "admin/system/templates/task",
+            "permissions": "can_add, can_write, can_writeown",
+            "arguments": "",
+            "keywords": "templates, task",
+            "priority": "0.5",
+            "changefreq": "weekly",
+            "login_required": 1,
+            "roles": {
+                "SUPER_ADMIN": ["can_add", "can_write", "can_writeown"],
+                "ADMIN": ["can_add", "can_write", "can_writeown"]
+            }
+        }, {
+            "title": "Template List",
+            "description": "Management of Templates.",
+            "controller": "System\\Templates\\Code\\Controllers\\Admin\\TemplatesController::indexAction",
+            "permissions": "can_view, can_viewown",
+            "unique_name": "admin.system.templates",
+            "route": "admin/system/templates",
+            "arguments": "",
+            "keywords": "template, list",
+            "priority": "0.5",
+            "changefreq": "weekly",
+            "login_required": 1,
+            "roles": {
+                "SUPER_ADMIN": ["can_view", "can_viewown"],
+                "ADMIN": ["can_view", "can_viewown"]
+            }
+        }, {
+            "title": "Add Template ",
+            "description": "Add Template .",
+            "controller": "System\\Templates\\Code\\Controllers\\Admin\\TemplatesController::addAction",
+            "unique_name": "admin.system.templates.add",
+            "route": "admin/system/templates/add",
+            "permissions": "can_add",
+            "arguments": {},
+            "keywords": "template,add",
+            "priority": "0.5",
+            "changefreq": "weekly",
+            "login_required": 1,
+            "roles": {
+                "SUPER_ADMIN": ["can_add"],
+                "ADMIN": ["can_add"]
+            }
+        }, {
+            "title": "Edit Template {{ item.name }}",
+            "description": "Edit Template {{ item.name }}.",
+            "controller": "System\\Templates\\Code\\Controllers\\Admin\\TemplatesController::editAction",
+            "unique_name": "admin.system.templates.edit",
+            "route": "admin/system/templates/edit/{id}",
+            "permissions": "can_add, can_write, can_writeown",
+            "arguments": {
+                "id": null
+            },
+            "keywords": "template, edit, {{ item.name }}",
+            "priority": "0.5",
+            "changefreq": "weekly",
+            "login_required": 1,
+            "roles": {
+                "SUPER_ADMIN": ["can_add", "can_write", "can_writeown"],
+                "ADMIN": ["can_add", "can_write", "can_writeown"]
+            }
+        }, {
+            "title": "Template Detail: {{ item.name }}",
+            "description": "Template Detail: {{ item.name }}",
+            "controller": "System\\Templates\\Code\\Controllers\\Admin\\TemplatesController::detailAction",
+            "unique_name": "admin.system.templates.detail",
+            "route": "admin/system/templates/detail/{id}",
+            "permissions": "can_view, can_viewown",
+            "arguments": {
+                "id": null
+            },
+            "keywords": "template, detail, {{ item.name }}",
+            "priority": "0.5",
+            "changefreq": "weekly",
+            "login_required": 1,
+            "roles": {
+                "SUPER_ADMIN": ["can_view", "can_viewown"],
+                "ADMIN": ["can_view", "can_viewown"]
+            }
+        }, {
+            "title": "Template Delete: {{ item.name }}",
+            "description": "Template Delete: {{ item.name }}",
+            "controller": "System\\Templates\\Code\\Controllers\\Admin\\TemplatesController::deleteAction",
+            "unique_name": "admin.system.templates.delete",
+            "route": "admin/system/templates/delete/{id}",
+            "permissions": "can_delete, can_deleteown",
+            "arguments": {
+                "id": null
+            },
+            "keywords": "template, delete, {{ item.name }}",
+            "priority": "0.5",
+            "changefreq": "weekly",
+            "login_required": 1,
+            "roles": {
+                "SUPER_ADMIN": ["can_delete", "can_deleteown"],
+                "ADMIN": ["can_delete", "can_deleteown"]
+            }
+        }, {
+            "title": "Template Save: {{ item.name }}",
+            "description": "Template Save: {{ item.name }}",
+            "controller": "System\\Templates\\Code\\Controllers\\Admin\\TemplatesController::saveAction",
+            "unique_name": "admin.system.templates.save",
+            "route": "admin/system/templates/save",
+            "permissions": "can_add, can_write, can_writeown",
+            "arguments": {
+                "id": null
+            },
+            "keywords": "template, save, {{ item.name }}",
+            "priority": "0.5",
+            "changefreq": "weekly",
+            "login_required": 1,
+            "roles": {
+                "SUPER_ADMIN": ["can_add", "can_write", "can_writeown"],
+                "ADMIN": ["can_add", "can_write", "can_writeown"]
+            }
+        }, {
+            "title": "Template Install: {{ item.name }}",
+            "description": "Template Install: {{ item.name }}",
+            "controller": "System\\Templates\\Code\\Controllers\\Admin\\TemplatesController::installAction",
+            "unique_name": "admin.system.templates.install",
+            "route": "admin/system/templates/install",
+            "permissions": "can_add, can_write, can_writeown",
+            "arguments": {
+                "path": null
+            },
+            "keywords": "template, Install, {{ item.name }}",
+            "priority": "0.5",
+            "changefreq": "weekly",
+            "login_required": 1,
+            "roles": {
+                "SUPER_ADMIN": ["can_add", "can_write", "can_writeown"],
+                "ADMIN": ["can_add", "can_write", "can_writeown"]
+            }
+        }]
+} 	

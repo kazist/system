@@ -1,0 +1,22 @@
+{
+    "frontend": [{
+            "title": "Facebook List",
+            "description": "Management of Facebook.",
+            "controller": "System\\Addons\\Facebook\\Controllers\\FacebookController::indexAction",
+            "permissions": "can_view, can_viewown",
+            "unique_name": "system.addons.facebook",
+            "route": "system/addons/facebook",
+            "arguments": "",
+            "keywords": "latest, facebook, list, addons",
+            "priority": "0.5",
+            "changefreq": "weekly",
+            "login_required": 0,
+            "roles": {
+                "SUPER_ADMIN": ["can_view", "can_viewown"],
+                "ADMIN": ["can_view", "can_viewown"],
+                "MODERATOR": ["can_view", "can_viewown"],
+                "USER": ["can_view", "can_viewown"]
+            }
+        }]
+
+} 	

@@ -1,0 +1,10 @@
+{
+    "name": "search",
+    "title": "Search Listing",
+    "explanation": "Search Listing",
+    "description": "Search Listing",
+    "version": 1,
+    "icon": "assets\/system\/addons\/search\/icon.png",
+    "extension": "addon",
+    "path": "system\/addons\/search\/"
+}

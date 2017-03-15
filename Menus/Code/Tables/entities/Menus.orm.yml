@@ -1,0 +1,93 @@
+System\Menus\Code\Tables\Menus:
+  table: system_menus
+  type: entity
+  id:
+    id:
+      type: integer
+      generator: { strategy: AUTO }
+  fields:
+    title:
+      name: title
+      type: string
+      length: 255
+      nullable: false
+    alias:
+      name: alias
+      type: string
+      length: 255
+      nullable: false
+    parent_id:
+      name: parent_id
+      type: integer
+      length: 11
+      nullable: true
+    category_id:
+      name: category_id
+      type: integer
+      length: 11
+      nullable: false
+    status:
+      name: status
+      type: integer
+      length: 11
+      nullable: true
+    icon:
+      name: icon
+      type: string
+      length: 255
+      nullable: true
+    url:
+      name: url
+      type: string
+      length: 255
+      nullable: true
+    position:
+      name: position
+      type: string
+      length: 255
+      nullable: true
+    extension_path:
+      name: extension_path
+      type: string
+      length: 255
+      nullable: false
+    published:
+      name: published
+      type: integer
+      length: 11
+      nullable: true
+    ordering:
+      name: ordering
+      type: integer
+      length: 11
+      nullable: true
+    created_by:
+      name: created_by
+      type: integer
+      length: 11
+      nullable: false
+    date_created:
+      name: date_created
+      type: datetime
+      nullable: false
+    modified_by:
+      name: modified_by
+      type: integer
+      length: 11
+      nullable: false
+    date_modified:
+      name: date_modified
+      type: datetime
+      nullable: false
+  indexes:
+    parent_id_index:
+      columns: [parent_id]
+    category_id_index:
+      columns: [category_id]
+  lifecycleCallbacks:
+    prePersist:
+      - onPrePersist
+      - onPrePersistCallbacks
+    preUpdate:
+      - onPreUpdate
+      - onPreUpdateCallbacks

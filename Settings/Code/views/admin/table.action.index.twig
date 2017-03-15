@@ -1,0 +1,25 @@
+{# empty Twig template #}
+
+{% import "form.macro.twig" as forms %}
+
+
+<a class="btn btn-success btn-xs kazi-save" href="#" title="Save"><span class="glyphicon glyphicon-plus"></span> Save</a>
+<a class="btn btn-danger btn-xs" href="{{ generate_url('admin.system.settings') }}" title="Cancel"><span class="glyphicon glyphicon-remove"></span> Cancel</a>
+<span class="dropdown"> 
+    <a class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" href="#" title="More Actions">
+        <span class="glyphicon glyphicon-cog"></span> More Actions<span class="caret"></span> </a>
+    <ul class="dropdown-menu">
+        <li>
+            <a class=" kazi-savenew" href="#" title="Save &amp; New">Save &amp; New</a>
+        </li>
+        <li>
+            <a class=" kazi-savecopy" href="#" title="Save as Copy">Save as Copy</a>
+        </li>
+        <li>
+            <a class=" kazi-saveclose" href="#" title="Save &amp; Close">Save &amp; Close</a>
+        </li>
+    </ul> 
+</span>
+
+<input id="main_form_id" name="main_form_id" value="" type="hidden">
+

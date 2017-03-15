@@ -1,0 +1,113 @@
+{% import "form.macro.twig" as forms %}
+
+{% set flexviews_options = callFunction( "System.Flexviews.Code.Models.FlexviewsModel", 'getFlexviewInput' ) %}
+
+{% set yes_no_options =
+    {
+        0:{'value':'1','text':'Yes'},
+        1:{'value':'0','text':'No'}
+    }
+%}
+
+{% set render_options =
+    {
+        0:{'value':'flexview','text':'Flexview'},
+        1:{'value':'twig','text':'Twig'},
+        2:{'value':'custom','text':'Custom'}
+    }
+%}
+
+{% set viewside_options =
+    {
+        0:{'value':'frontend','text':'Frontend'},
+        1:{'value':'backend','text':'Backend'}
+    }
+%}
+
+{% set url_link = generate_url(document.base_route) %}
+
+<a class="btn btn-success btn-xs" href="#"data-toggle="modal" data-target="#add-flexview-modal">
+    <span class="glyphicon glyphicon glyphicon-plus"></span> Add Flexviews
+</a>
+
+{% if twig_file != 'recordpicker' %}
+    <span class="dropdown"> 
+        <a class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown"  href="#">
+            <span class="glyphicon glyphicon-cog"></span> More Actions<span class="caret"></span> 
+        </a>
+        <ul class="dropdown-menu">
+            <li>
+                <a class="kazi-delete" href="#">Delete</a>
+            </li>
+        </ul> 
+    </span>
+{% endif %}
+
+<input id="main_form_id" type="hidden" name="main_form_id" value="{{ main_form_id }}"/>
+
+
+<!-- Modal -->
+<div id="add-flexview-modal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+
+            <form class="form-horizontal" action="{{ generate_url('admin.system.flexviews.save')}}" method="POST" >
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Modal Header</h4>
+                </div>
+
+                <div class="modal-body">
+
+                    {{ forms.input('title' , 'text', null, 'Title')  }}
+                    {{ forms.input('render', 'radio', 'flexview', 'Render Type', ' flexview_type', null, null, null, render_options) }} 
+
+                    {{ forms.input('twig' , 'text', null, 'Twig File', ' flexview_twig')  }}
+                    {{ forms.input('custom' , 'textarea', null, 'Custom Html', ' flexview_custom')  }}
+                    {{ forms.input('flexview' , 'select', null, 'Flexviews', ' flexview_flexview', null, null, null, flexviews_options)  }}
+
+                    <h4>Setting</h4>
+                    {{ forms.input('viewside' , 'radio', 'frontend', 'Viewside', null, null, null, null, viewside_options)  }}
+                    {{ forms.input('homepage', 'yesno', null, 'Homepage', null, null, null, null, yes_no_options) }} 
+                    {{ forms.input('allpages', 'yesno', null, 'All Pages', null, null, null, null, yes_no_options) }} 
+                    {{ forms.input('extensionpages', 'yesno', null, 'Extension Pages', null, null, null, null, yes_no_options) }} 
+                    {{ forms.input('published', 'yesno', null, 'Published', null, null, null, null, yes_no_options) }} 
+
+                </div>
+
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-default btn-success">Save</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+
+                {{ forms.input('_token' ) }} 
+
+            </form>
+
+        </div>
+
+    </div>
+</div>
+
+<script>
+    jQuery(document).ready(function () {
+
+        jQuery('.flexview_flexview-group').show();
+        jQuery('.flexview_custom-group').hide();
+        jQuery('.flexview_twig-group').hide();
+
+        jQuery('.flexview_type-group input').click(function () {
+
+            var type = jQuery(this).val();
+
+            jQuery('.flexview_flexview-group').hide();
+            jQuery('.flexview_custom-group').hide();
+            jQuery('.flexview_twig-group').hide();
+
+            jQuery('.flexview_' + type + '-group').show();
+
+        });
+    });
+</script>

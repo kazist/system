@@ -1,0 +1,58 @@
+System\Routes\Flexviews\Code\Tables\Flexviews:
+  table: system_routes_flexviews
+  type: entity
+  id:
+    id:
+      type: integer
+      generator: { strategy: AUTO }
+  fields:
+    flexview_id:
+      name: flexview_id
+      type: integer
+      length: 11
+      nullable: false
+    route:
+      name: route
+      type: string
+      length: 255
+      nullable: false
+    visible:
+      name: visible
+      type: integer
+      length: 11
+      nullable: true
+    hidden:
+      name: hidden
+      type: integer
+      length: 11
+      nullable: true
+    created_by:
+      name: created_by
+      type: integer
+      length: 11
+      nullable: true
+    date_created:
+      name: date_created
+      type: datetime
+      nullable: true
+    modified_by:
+      name: modified_by
+      type: integer
+      length: 11
+      nullable: true
+    date_modified:
+      name: date_modified
+      type: datetime
+      nullable: true
+  indexes:
+    flexview_id_index:
+      columns: [flexview_id]
+    route_index:
+      columns: [route]
+  lifecycleCallbacks:
+    prePersist:
+      - onPrePersist
+      - onPrePersistCallbacks
+    preUpdate:
+      - onPreUpdate
+      - onPreUpdateCallbacks

@@ -1,0 +1,97 @@
+{# empty Twig template #}
+
+{% set params = { 'contest_id': contest_id, 'offset': offset} %}
+
+{% set blogs = callFunction( "Cms.Blogs.Code.Models.BlogsModel", 'getContestBlogs', params ) %}
+{% set total = callFunction( "Cms.Blogs.Code.Models.BlogsModel", 'getContestBlogsTotal', params ) %}
+
+{% if blogs|length > 0 %}
+    <div class="table-responsive">
+        <table class="table">
+
+            <thead>
+            <th>Title</th>
+            <th>Contest Start</th>
+            <th>Contest End</th>
+            <th>Contest Closed</th>
+            <th>Hits</th>
+            </thead>
+
+            <tbody>
+                {% for blog in blogs %}
+
+                    {% set blog_url =  generate_url('cms.blogs.detail', {'id': blog.id}) %}
+
+                    <tr>
+                        <td>
+                            <a href="{{ blog_url }}" title="{{ blog.title }} ">
+                                {{ blog.title }} 
+                            </a>
+                        </td>
+                        <td>
+                            {% if blog.contest_start_date != '0000-00-00 00:00:00' %}
+                                {{ blog.contest_start_date ? blog.contest_start_date|date('d M Y') }}
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if blog.contest_end_date != '0000-00-00 00:00:00' %}
+                                {{ blog.contest_end_date ? blog.contest_end_date|date('d M Y') }}
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if blog.contest_closed  %}
+                                Yes
+                            {% else %}
+                                No
+                            {% endif %}
+                        </td>
+                        <td>{{ blog.hit }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% else %}
+    No Blogs
+{% endif %}
+
+<div class="clearfix"></div>
+
+{% if total > 10 %}
+
+    <div class="contest-blogs-navigation">
+
+        {% if offset %}
+            <div class="previous-blogs pull-left">
+                <a class="btn btn-default btn-sm btn-flat" offset="{{ offset - 10 }}" action="previous" contest_id="{{ contest_id }}">
+                    <i class="fa fa-arrow-left"></i>
+                    Pre
+                </a>
+            </div>
+        {% endif %}
+
+        {% if (offset + 10) < total %}
+            <div class="next-blogs pull-right">
+                <a class="btn btn-default btn-sm btn-flat" offset="{{ offset + 10  }}" action="next" contest_id="{{ contest_id }}">
+                    <i class="fa fa-arrow-right"></i>
+                    Next 
+                </a>
+            </div>
+        {% endif %}
+    </div>
+
+{% endif %}
+
+page 
+{% if not offset %}
+    1
+{% else%}
+    {{ (offset/10)|round(0, 'ceil')  }} 
+{% endif%}
+of 
+{% if not total %}
+    1
+{% else%}
+    {{ (total/10)|round(0, 'ceil') }} 
+{% endif%}
+

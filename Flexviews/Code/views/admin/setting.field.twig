@@ -1,0 +1,16 @@
+{% import "form.macro.twig" as forms %}
+
+{% set settings = get_context('settings') %}
+
+<div class="snippet_access_settings">
+
+    {% if settings|length > 0 %}
+        {% for key,setting in settings %}
+
+            {{ forms.input('params.' ~ setting.name , setting.type, setting.default, setting.label, null, null, null, null, setting.options) }}
+        {% endfor %}
+    {% else %}
+        No Setting To List
+    {% endif %}
+</div>
+

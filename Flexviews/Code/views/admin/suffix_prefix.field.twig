@@ -1,0 +1,16 @@
+{# empty Twig template #}
+
+{% set item = get_context('item') %}
+
+{{ forms.input('render', 'hidden', item.render) }}
+
+{% if item.render == 'custom' %}
+    <b>Main Content</b>
+    {{ forms.input('main_content' , 'editor', item.main_content)  }}
+{% endif %}
+
+<b>Prefix Content</b>
+{{ forms.input('prefix_content' , 'textarea', item.prefix_content)  }}
+
+<b>Suffix Content</b>
+{{ forms.input('suffix_content' , 'textarea', item.suffix_content)  }}

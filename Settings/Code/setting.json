@@ -1,0 +1,6 @@
+[{
+        "name": "disqus_shortname",
+        "label": "Disqus Shortname",
+        "default": "",
+        "type": "text"
+    }]
