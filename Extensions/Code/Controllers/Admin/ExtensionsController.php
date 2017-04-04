@@ -28,7 +28,6 @@ class ExtensionsController extends BaseController {
     public function installAction($path, $type, $namespace) {
         $urls = array();
 
-        $extensionsModel = new ExtensionsModel($this->doctrine, $this->request);
         $session = $this->container->get('session');
         $clear_name = str_replace('.', '_', $path);
 
@@ -55,14 +54,13 @@ class ExtensionsController extends BaseController {
     }
 
     public function indexAction($offset = 0, $limit = 6) {
-        $extensionModel = new ExtensionsModel($this->doctrine, $this->request);
 
         $simple = $this->request->query->get('simple');
 
-        $repositories = $extensionModel->getExtensionList();
+        $repositories = $this->model->getExtensionList();
         $data_arr['items'] = $repositories;
 
-        $extensionModel->setAssets(JPATH_ROOT . '/assets/css/bootstrap.css');
+        $this->model->setAssets(JPATH_ROOT . '/assets/css/bootstrap.css');
 
         $this->html .= $this->render('System:Extensions:Code:views:admin:extension.list.twig', $data_arr);
 
@@ -77,9 +75,9 @@ class ExtensionsController extends BaseController {
     }
 
     public function updatesystemAction() {
-
-        $extensionModel = new ExtensionsModel($this->doctrine, $this->request);
-        $extensionModel->updateSystem();
+ echo 'Not working updatesystemAction';
+        exit;
+        $this->model->updateSystem();
 
         return $this->redirectToRoute('admin.system.extensions');
     }

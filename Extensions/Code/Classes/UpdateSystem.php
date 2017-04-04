@@ -24,7 +24,7 @@ class UpdateSystem {
     public $destination_file = '';
 
     public function updateExtensions($request) {
-
+echo 'Not working'; exit;
         set_time_limit(0);
 
         $autodiscover = new AutoDiscover();
