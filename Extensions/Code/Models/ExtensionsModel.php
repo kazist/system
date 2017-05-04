@@ -53,9 +53,9 @@ class ExtensionsModel extends BaseModel {
         $this->roles_ids['MODERATOR'] = $this->getRoleId('MODERATOR');
         $this->roles_ids['USER'] = $this->getRoleId('USER');
 
-        $extension_data = $factory->getRecord('#__system_extensions', 'se', array('se.path=:path'), array('path' => trim($path_slash, '/') . '/'));
+        $extension_data = $factory->getRecord('#__system_extensions', 'se', array('se.path=:path'), array('path' => 'applications/'.trim($path_slash, '/') . '/'));
         $this->extension_id = $extension_data->id;
-
+        
         switch ($type) {
             case 'prepare':
                 $this->prepareTables();
@@ -1130,6 +1130,7 @@ class ExtensionsModel extends BaseModel {
                 $extension_list['repositories'][$rep_key]->updates[$key]['extension'] = $extension_data[$name]->extension;
                 $extension_list['repositories'][$rep_key]->updates[$key]['path'] = $extension_data[$name]->path;
                 $extension_list['repositories'][$rep_key]->updates[$key]['icon'] = $extension_data[$name]->icon;
+                $extension_list['repositories'][$rep_key]->updates[$key]['installed_id'] = $extension_data[$name]->id;
                 $extension_list['repositories'][$rep_key]->updates[$key]['installed_version'] = $extension_data[$name]->installed_version;
                 $extension_list['repositories'][$rep_key]->updates[$key]['is_installed'] = $is_installed;
             }
@@ -1139,8 +1140,7 @@ class ExtensionsModel extends BaseModel {
     }
 
     public function updateSystem() {
-        echo 'Not working 1';
-        exit;
+
         $updatesystem = new UpdateSystem();
 
         return $updatesystem->updateExtensions($this->request);

@@ -34,20 +34,20 @@ class ExtensionsController extends BaseController {
         if ($path <> '' && $type == '') {
             $session_urls = $session->get('urls');
 
-            $urls = $extensionsModel->prepareUrl($path);
+            $urls = $this->model->prepareUrl($path);
             $new_urls = (!is_array($session_urls)) ? $urls : array_merge($session_urls, $urls);
             $session->set('urls', $new_urls);
         } elseif ($path == '') {
-            $urls = $extensionsModel->prepareUrl();
+            $urls = $this->model->prepareUrl();
             $session->set('urls', $urls);
         } else {
             $urls = $session->get('urls');
         }
 
-        $extensionsModel->install($path, $type, $namespace);
+        $this->model->install($path, $type, $namespace);
 
         if (!empty($urls)) {
-            return $extensionsModel->javascriptRedirector($path, $type, $namespace);
+            return $this->model->javascriptRedirector($path, $type, $namespace);
         }
 
         return $this->redirectToRoute('admin.system.extensions');
@@ -75,8 +75,7 @@ class ExtensionsController extends BaseController {
     }
 
     public function updatesystemAction() {
- echo 'Not working updatesystemAction';
-        exit;
+
         $this->model->updateSystem();
 
         return $this->redirectToRoute('admin.system.extensions');
