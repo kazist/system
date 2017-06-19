@@ -719,6 +719,7 @@ class ExtensionsModel extends BaseModel {
                 $cron['subset_id'] = $this->subset_id;
                 $cron['is_new'] = 0;
                 $cron['completed_running'] = 0;
+                $cron['locked_key'] = '';
                 $cron['is_modified'] = 0;
 
                 $ids[] = $factory->saveRecord('#__system_crons', $cron);
