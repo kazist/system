@@ -11,5 +11,8 @@
             "homepage": "http://emshyinnovate.com",
             "role": "Founder & Developer"
         }
-    ]
+    ],
+    "require": {
+        "egulias/email-validator": "@stable"
+    }
 }
