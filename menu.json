@@ -2,10 +2,15 @@
     "title": "System",
     "description": "System",
     "alias": "system",
-    "icon": "fa-picture-o",
+    "icon": "fa fa-cogs",
     "home_link": "system\/languages",
     "is_core": "1",
     "menulist": [{
+            "title": "Applications",
+            "alias": "admin_system_applications",
+            "url": "admin/system/applications",
+            "children": []
+        }, {
             "title": "Crons",
             "alias": "admin_system_crons",
             "url": "admin/system/crons",
@@ -29,7 +34,12 @@
             "title": "Menus",
             "alias": "admin_system_menus",
             "url": "admin/system/menus",
-            "children": []
+            "children": [{
+                    "title": "Menus Categories",
+                    "alias": "admin_system_menus_categories",
+                    "url": "admin/system/menus/categories",
+                    "children": []
+                }]
         }, {
             "title": "Routes",
             "alias": "admin_system_routes",
