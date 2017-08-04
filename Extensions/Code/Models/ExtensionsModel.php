@@ -195,6 +195,10 @@ class ExtensionsModel extends BaseModel {
         $table_prepared = $session->get('table_prepared');
 
         if (!$table_prepared || $clear_name == '') {
+
+            $this->doctrine->entity_path = JPATH_ROOT . 'applications/Media/Media/Code/Tables';
+            $this->doctrine->getEntityManager();
+
             $this->doctrine->entity_path = JPATH_ROOT . 'applications/System/Flexviews/Code/Tables';
             $this->doctrine->getEntityManager();
 
