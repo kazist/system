@@ -8,16 +8,16 @@
         <b>Subscription</b>
         <ul class="menu-open">
             <li>
-                <a href="{{ generate_url('admin.subscriptions.subscriptions') }}">All Members</a>
+                <a href="{{ generate_url('admin.affiliates.affiliates') }}">All Members</a>
             </li>
             <li>
-                <a href="{{ generate_url('admin.subscriptions.subscriptions', {'type':'pro'}) }}">Pro Members</a>
+                <a href="{{ generate_url('admin.affiliates.affiliates', {'type':'pro'}) }}">Pro Members</a>
             </li>
             <li>
-                <a href="{{ generate_url('admin.subscriptions.subscriptions', {'type':'expired'}) }}">Expired Members</a>
+                <a href="{{ generate_url('admin.affiliates.affiliates', {'type':'expired'}) }}">Expired Members</a>
             </li>
             <li>
-                <a href="{{ generate_url('admin.subscriptions.subscriptions', {'type':'free'}) }}">Free Members</a>
+                <a href="{{ generate_url('admin.affiliates.affiliates', {'type':'free'}) }}">Free Members</a>
             </li>
         </ul>
     </li>
@@ -25,7 +25,7 @@
         <b>Finance</b>
         <ul>  
             <li>
-                <a href="{{ generate_url('admin.payments.tokens') }}">Tokens</a>
+                <a href="{{ generate_url('admin.tokens.tokens') }}">Tokens</a>
             </li>
             <li>
                 <a href="{{ generate_url('admin.payments.transactions', {'view':'commission'}) }}">Commission History</a>
@@ -44,10 +44,10 @@
                 <a href="{{ generate_url('admin.payments.gateways') }}">Payment Gateways</a>
             </li>
             <li>
-                <a href="{{ generate_url('admin.payments.masspay') }}">Mass Pay</a>
+                <a href="{{ generate_url('admin.withdraws.masspay') }}">Mass Pay</a>
             </li>
             <li>
-                <a href="{{ generate_url('payments.masspay.generatemasspay') }}" target="_blank">Generate MassPay</a>
+                <a href="{{ generate_url('withdraws.masspay.generatemasspay') }}" target="_blank">Generate MassPay</a>
             </li>
 
         </ul>
