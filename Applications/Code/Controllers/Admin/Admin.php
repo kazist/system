@@ -8,17 +8,17 @@
  */
 
 /**
- * Description of SettingsController
+ * Description of ApplicationsController
  *
  * @author sbc
  */
 
-namespace System\Settings\Code\Controllers;
+namespace System\Applications\Code\Controllers\Admin;
 
 defined('KAZIST') or exit('Not Kazist Framework');
 
 use Kazist\Controller\BaseController;
 
-class SettingsController extends BaseController {
+class ApplicationsController extends BaseController {
     
 }
