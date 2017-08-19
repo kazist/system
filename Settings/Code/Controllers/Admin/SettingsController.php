@@ -23,7 +23,10 @@ class SettingsController extends BaseController {
 
     public function indexAction($offset = 0, $limit = 10) {
 
-        $alias = $this->request->get('alias');
+        $tmp_alias = $this->request->get('alias');
+
+        $alias_arr = explode('.', $tmp_alias);
+        $alias = $alias_arr[0];
 
         if ($alias == '') {
             $alias = 'system';
@@ -38,7 +41,7 @@ class SettingsController extends BaseController {
 
         $this->data_arr['settings'] = $settings;
         $this->data_arr['settings_html'] = $html;
-        $this->data_arr['alias'] = alias;
+        $this->data_arr['alias'] = $alias;
         $this->data_arr['return_url'] = base64_encode($this->model->generateUrl('admin.system.settings', array('alias' => $alias)));
 
         return parent::indexAction($offset, $limit);
