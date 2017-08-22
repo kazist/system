@@ -83,7 +83,11 @@ class SettingsModel extends BaseModel {
 
         $record = $this->getQueryedRecord('#__system_settings', 'ss', array('ss.name=:name'), array('name' => $name));
 
-        return $record->value;
+        if (is_object($record)) {
+            return $record->value;
+        } else {
+            return $setting['default'];
+        }
     }
 
     public function getSettingOptions($setting) {
