@@ -64,7 +64,7 @@ class SettingsModel extends BaseModel {
                         }
 
                         if ($setting['source'] <> '') {
-                            $setting_obj['groups'][$group_key]['settings'][$seting_key]['options'] = array_merge($setting_obj[$key]['options'], $this->getSettingOptions($setting));
+                            $setting_obj['groups'][$group_key]['settings'][$seting_key]['options'] = array_merge($setting_obj['groups'][$group_key]['settings'][$seting_key]['options'], $this->getSettingOptions($setting));
                         }
 
                         $setting_obj['groups'][$group_key]['settings'][$seting_key]['default'] = $this->getSettingDefault($setting);

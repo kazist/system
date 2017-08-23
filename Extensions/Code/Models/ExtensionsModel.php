@@ -385,6 +385,7 @@ class ExtensionsModel extends BaseModel {
     }
 
     public function installNamespace($new_path, $path, $namespace_path) {
+
         $factory = new KazistFactory();
 
         $namespaces = json_decode(file_get_contents($namespace_path));
@@ -405,7 +406,7 @@ class ExtensionsModel extends BaseModel {
             $subset_data = $factory->getRecord('#__system_subsets', 'ss', $where_arr, $parameter_arr);
 
             $this->subset_id = (isset($subset_data->id)) ? $subset_data->id : 0;
-
+/*
             if (!isset($subset_data->is_modified) || !$subset_data->is_modified) {
 
                 $manifest['id'] = $subset_data->id;
@@ -418,7 +419,7 @@ class ExtensionsModel extends BaseModel {
 
                 $this->subset_id = $factory->saveRecord('#__system_subsets', $manifest);
             }
-
+*/
             $this->registerFiles(JPATH_ROOT . 'applications/' . $namespace_rewrite . '/Code/', $namespace_rewrite);
         }
     }
@@ -478,6 +479,7 @@ class ExtensionsModel extends BaseModel {
         $files['setting'] = $file_path . 'setting.json';
         $files['search'] = $file_path . 'search.json';
         $files['flexview'] = $file_path . 'flexview.json';
+        $files['route'] = $file_path . 'route.json';
 
         $namespace_path = trim(str_replace('\\', '/', $namespace_rewrite), '/');
         $namespace_path = ($namespace_path != '') ? $namespace_path : 'EMPTY';
@@ -489,7 +491,7 @@ class ExtensionsModel extends BaseModel {
         if (file_exists($files['email'])) {
             $this->updateEmail($files['email'], $namespace_path);
         }
-
+ 
         if (file_exists($files['search'])) {
             $this->updateSearch($files['search'], $namespace_path);
         }
@@ -504,6 +506,10 @@ class ExtensionsModel extends BaseModel {
 
         if (file_exists($files['flexview'])) {
             $this->updateFlexview($files['flexview'], $namespace_path);
+        }
+
+        if (file_exists($files['route'])) {
+            $this->updateRoute($files['route'], $namespace_path);
         }
     }
 
@@ -749,7 +755,7 @@ class ExtensionsModel extends BaseModel {
             $email_layouts = $emails['layout'];
             $this->updateEmailLayout($email_layouts, $namespace_rewrite);
         }
-
+ 
         if (isset($emails['scheduled'])) {
             $email_scheduled = $emails['scheduled'];
             $this->updateEmailScheduled($email_scheduled, $namespace_rewrite);
@@ -882,17 +888,16 @@ class ExtensionsModel extends BaseModel {
 
         $ids = array();
         $factory = new KazistFactory();
-
+       
         foreach ($emails as $key => $email) {
 
-            $parameter_arr = array('subset_id' => $this->subset_id, 'system_tracking_id' => $email->tracking_id);
-            $where_arr = array('nsh.subset_id=:subset_id', 'nsh.system_tracking_id=:system_tracking_id');
+            $parameter_arr = array('extension_path' => $namespace_rewrite, 'system_tracking_id' => $email->tracking_id);
+            $where_arr = array('nsh.extension_path=:extension_path', 'nsh.system_tracking_id=:system_tracking_id');
             $email_data = $factory->getRecord('#__notification_subscribers_harvesters', 'nsh', $where_arr, $parameter_arr);
 
             if (!isset($email_data->is_modified) || !$email_data->is_modified) {
 
                 $email['system_tracking_id'] = $email->tracking_id;
-                $email['subset_id'] = $this->subset_id;
                 $email['extension_path'] = $namespace_rewrite;
                 $email['id'] = $email_data->id;
                 $email['is_modified'] = 0;
@@ -931,83 +936,30 @@ class ExtensionsModel extends BaseModel {
         }
     }
 
-    /** @TODO Remove this function */
-    public function updatePermission($permissions, $role_name) {
-
-        $factory = new KazistFactory();
-
-        $rights = array('can_add', 'can_view', 'can_write', 'can_delete', 'can_viewown', 'can_writeown', 'can_deleteown');
-        $role_id = $this->roles_ids[$role_name];
-
-        $parameter_arr = array('role_id' => $role_id, 'subset_id' => $this->subset_id);
-        $where_arr = array('up.role_id=:role_id', 'up.subset_id=:subset_id');
-        $permission_data = $factory->getRecord('#__users_permission', 'up', $where_arr, $parameter_arr);
-
-        if (!isset($permission_data->is_modified) || !$permission_data->is_modified) {
-
-            $permission_data = array();
-            $default_right = ( in_array('all_permission', $permissions)) ? 1 : 0;
-
-            foreach ($rights as $right) {
-                $current_right = ( $permissions[$right]) ? $permissions[$right] : $default_right;
-                $permission_data[$right] = $current_right;
-            }
-
-            $permission_data['id'] = $permission_data->id;
-            $permission_data['role_id'] = $role_id;
-            $permission_data['subset_id'] = $this->subset_id;
-            $permission_data['is_modified'] = 0;
-
-            $factory->saveRecord('#__users_permission', $permission_data);
-        }
-
-
-        return;
-    }
-
-    /** @TODO Remove this function */
-    public function updateRoute($routes, $viewside, $namespace_rewrite) {
-
+    public function updateRoute($route_path, $namespace_path) {
+        
         $ids = array();
         $factory = new KazistFactory();
 
+         $all_route = json_decode(file_get_contents($route_path), true);
+         
+$back_routes=(count($all_route['backend']))?$all_route['backend']:array();
+$front_routes=(count($all_route['frontend']))?$all_route['frontend']:array();
+  $routes = array_merge($front_routes,$back_routes);
+
+    
         foreach ($routes as $key => $route) {
 
-            $parameter_arr = array('unique_name' => $route['unique_name']);
-            $where_arr = array('sr.unique_name=:unique_name');
-            $route_data = $factory->getRecord('#__system_routes', 'sr', $where_arr, $parameter_arr);
-
-
-            if (!isset($route_data->is_modified) || !$route_data->is_modified) {
-
-                $route['arguments'] = json_encode($route['arguments']);
-                $route['seo_arguments'] = json_encode($route['seo_arguments']);
-
-                $route['id'] = $route_data->id;
-                $route['subset_id'] = $this->subset_id;
-                $route['viewside'] = $viewside;
-                $route['extension_path'] = $namespace_rewrite;
-                $route['published'] = 1;
-                $route['is_modified'] = 0;
-                $route['is_processed'] = 0;
-
-                $ids[] = $route_id = $factory->saveRecord('#__system_routes', $route);
-
-                if (!empty($route['roles'])) {
-                    $this->updateRouteRole($route_id, $route['roles']);
-                }
+            if (!empty($route['roles'])) {
+                $this->updateRouteRole($route['unique_name'], $route['roles']);
             }
         }
 
-        if (!empty($ids)) {
-            $parameter_arr = array("extension_path" => $namespace_rewrite, 'viewside' => $viewside);
-            $where_arr = array('id NOT IN (' . implode(',', $ids) . ')', 'viewside = :viewside', "extension_path = :extension_path OR extension_path IS NULL", 'is_modified=0');
-            $factory->deleteRecords("#__system_routes", $where_arr, $parameter_arr);
-        }
+        
     }
 
     /** @TODO Remove this function */
-    public function updateRouteRole($route_id, $roles) {
+    public function updateRouteRole($route_name, $roles) {
 
         $factory = new KazistFactory();
 
@@ -1017,10 +969,9 @@ class ExtensionsModel extends BaseModel {
 
             $role_id = $this->roles_ids[$role];
 
-
-            $parameter_arr = array('role_id' => $role_id, 'route_id' => $route_id);
-            $where_arr = array('srp.role_id=:role_id', 'srp.route_id=:route_id');
-            $route_role_data = $factory->getRecord('#__system_routes_permissions', 'srp', $where_arr, $parameter_arr);
+            $parameter_arr = array('role_id' => $role_id, 'route' => $route_name);
+            $where_arr = array('srp.role_id=:role_id', 'srp.route=:route');
+            $route_role_data = $factory->getRecord('#__users_permission', 'srp', $where_arr, $parameter_arr);
 
             if (!isset($route_role_data->is_modified) || !$route_role_data->is_modified) {
 
@@ -1034,10 +985,10 @@ class ExtensionsModel extends BaseModel {
                 }
 
                 $route_data['id'] = $route_role_data->id;
-                $route_data['route_id'] = $route_id;
+                $route_data['route'] = $route_name;
                 $route_data['role_id'] = $role_id;
 
-                $factory->saveRecord('#__system_routes_permissions', $route_data);
+                $factory->saveRecord('#__users_permission', $route_data);
             }
         }
     }
