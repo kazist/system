@@ -30,6 +30,9 @@ class ExtensionsModel extends BaseModel {
     public $subset_id = '';
     public $extension_id = '';
     public $roles_ids = '';
+    public $offset = 0;
+    public $limit = 200;
+    public $path = '';
     public $type = '';
     public $namespace = '';
     public $menu_ids = array();
@@ -39,6 +42,11 @@ class ExtensionsModel extends BaseModel {
         $this->namespace = $namespace;
 
         $factory = new KazistFactory();
+
+        $this->path = $path;
+        $this->type = $type;
+        $this->namespace = $namespace;
+        $this->offset = $this->request->get('offset');
 
         $path_arr = explode('.', $path);
         $path_arr = array_map('ucfirst', $path_arr);
@@ -236,6 +244,9 @@ class ExtensionsModel extends BaseModel {
             $this->doctrine->entity_path = JPATH_ROOT . 'applications/Users/Roles/Code/Tables';
             $this->doctrine->getEntityManager();
 
+            $this->doctrine->entity_path = JPATH_ROOT . 'applications/Users/Doubleauth/Routes/Code/Tables';
+            $this->doctrine->getEntityManager();
+
             $this->doctrine->entity_path = JPATH_ROOT . 'applications/System/Settings/Code/Tables';
             $this->doctrine->getEntityManager();
 
@@ -406,20 +417,20 @@ class ExtensionsModel extends BaseModel {
             $subset_data = $factory->getRecord('#__system_subsets', 'ss', $where_arr, $parameter_arr);
 
             $this->subset_id = (isset($subset_data->id)) ? $subset_data->id : 0;
-/*
-            if (!isset($subset_data->is_modified) || !$subset_data->is_modified) {
+            /*
+              if (!isset($subset_data->is_modified) || !$subset_data->is_modified) {
 
-                $manifest['id'] = $subset_data->id;
-                $manifest['offset'] = 0;
-                $manifest['is_processed'] = 0;
-                $manifest['is_modified'] = 0;
-                $manifest['path'] = strtolower($namespace_rewrite);
-                $manifest['extension_id'] = $this->extension_id;
-                $manifest['date_file_modified'] = $manifest['date_file_modified'];
+              $manifest['id'] = $subset_data->id;
+              $manifest['offset'] = 0;
+              $manifest['is_processed'] = 0;
+              $manifest['is_modified'] = 0;
+              $manifest['path'] = strtolower($namespace_rewrite);
+              $manifest['extension_id'] = $this->extension_id;
+              $manifest['date_file_modified'] = $manifest['date_file_modified'];
 
-                $this->subset_id = $factory->saveRecord('#__system_subsets', $manifest);
-            }
-*/
+              $this->subset_id = $factory->saveRecord('#__system_subsets', $manifest);
+              }
+             */
             $this->registerFiles(JPATH_ROOT . 'applications/' . $namespace_rewrite . '/Code/', $namespace_rewrite);
         }
     }
@@ -491,7 +502,7 @@ class ExtensionsModel extends BaseModel {
         if (file_exists($files['email'])) {
             $this->updateEmail($files['email'], $namespace_path);
         }
- 
+
         if (file_exists($files['search'])) {
             $this->updateSearch($files['search'], $namespace_path);
         }
@@ -517,6 +528,7 @@ class ExtensionsModel extends BaseModel {
 
         $query = new Query();
         $factory = new KazistFactory();
+        $session = $factory->getSession();
 
         $namespace_tablealias = '';
         $namespace_arr = explode('/', $namespace);
@@ -529,46 +541,68 @@ class ExtensionsModel extends BaseModel {
 
         $datas = json_decode(file_get_contents($data_path), true);
 
+        $is_paged = false;
+        if (count($datas) > $this->limit && !$this->offset) {
 
-        foreach ($datas as $key => $data) {
+            $is_paged = true;
+            $session_urls = $session->get('urls');
 
-            $data['system_tracking_id'] = (isset($data['system_tracking_id']) && $data['system_tracking_id']) ? $data['system_tracking_id'] : $data['tracking_id'];
-
-            if (array_key_exists('_table_name', $data) && $data['_table_name'] <> '') {
-                $namespace_tablename = $data['_table_name'];
-                $namespace_tablealias = $query->getTableAlias($data['_table_name']);
+            $stages = ceil(count($datas) / $this->limit);
+            for ($x = 1; $x < $stages; $x++) {
+                $session_urls[] = WEB_BASE . '/admin/system-install/' . $this->path . '/' . $this->type . '/' . $this->namespace . '?offset=' . ($this->limit * $x);
             }
 
-            if ($key > 500) {
-                break;
-            }
+            $session->set('urls', $session_urls);
+        }
 
-            $where_arr = array($namespace_tablealias . '.system_tracking_id=:system_tracking_id');
-            $parameter_arr = array('system_tracking_id' => $data['system_tracking_id']);
+        if (count($datas) < $this->limit || $this->offset || $is_paged) {
 
-            try {
-                $tmp_data = $factory->getRecord('#__' . $namespace_tablename, $namespace_tablealias, $where_arr, $parameter_arr);
-            } catch (\Exception $ex) {
+            $start = (int)$this->offset;
+            $end = $this->offset + $this->limit;
+            $end = ($end > count($datas)) ? count($datas) : $end;
 
-                $this->doctrine->entity_path = JPATH_ROOT . 'applications/' . $namespace . '/Code/Tables';
-                $this->doctrine->getEntityManager();
+            for ($x = $start; $x < $end; $x++) {
+                // foreach ($datas as $key => $data) {
+                $data = $datas[$x];
+
+                $data['system_tracking_id'] = (isset($data['system_tracking_id']) && $data['system_tracking_id']) ? $data['system_tracking_id'] : $data['tracking_id'];
+
+                if (array_key_exists('_table_name', $data) && $data['_table_name'] <> '') {
+                    $namespace_tablename = $data['_table_name'];
+                    $namespace_tablealias = $query->getTableAlias($data['_table_name']);
+                }
+
+                if ($key > $this->limit) {
+                    break;
+                }
+
+                $where_arr = array($namespace_tablealias . '.system_tracking_id=:system_tracking_id');
+                $parameter_arr = array('system_tracking_id' => $data['system_tracking_id']);
 
                 try {
                     $tmp_data = $factory->getRecord('#__' . $namespace_tablename, $namespace_tablealias, $where_arr, $parameter_arr);
-                } catch (Exception $ex) {
-                    $factory->enqueueMessage('Error Adding data:' . json_encode($data), 'error');
+                } catch (\Exception $ex) {
+
+                    $this->doctrine->entity_path = JPATH_ROOT . 'applications/' . $namespace . '/Code/Tables';
+                    $this->doctrine->getEntityManager();
+
+                    try {
+                        $tmp_data = $factory->getRecord('#__' . $namespace_tablename, $namespace_tablealias, $where_arr, $parameter_arr);
+                    } catch (Exception $ex) {
+                        $factory->enqueueMessage('Error Adding data:' . json_encode($data), 'error');
+                    }
                 }
-            }
 
-            if (!isset($tmp_data->is_modified) || !$tmp_data->is_modified) {
+                if (!isset($tmp_data->is_modified) || !$tmp_data->is_modified) {
 
-                $data['id'] = $tmp_data->id;
-                $data['is_modified'] = 0;
+                    $data['id'] = $tmp_data->id;
+                    $data['is_modified'] = 0;
 
-                try {
-                    $factory->saveRecord('#__' . $namespace_tablename, $data);
-                } catch (Exception $ex) {
-                    $factory->enqueueMessage('Error Adding data:' . json_encode($data), 'error');
+                    try {
+                        $factory->saveRecord('#__' . $namespace_tablename, $data);
+                    } catch (Exception $ex) {
+                        $factory->enqueueMessage('Error Adding data:' . json_encode($data), 'error');
+                    }
                 }
             }
         }
@@ -755,7 +789,7 @@ class ExtensionsModel extends BaseModel {
             $email_layouts = $emails['layout'];
             $this->updateEmailLayout($email_layouts, $namespace_rewrite);
         }
- 
+
         if (isset($emails['scheduled'])) {
             $email_scheduled = $emails['scheduled'];
             $this->updateEmailScheduled($email_scheduled, $namespace_rewrite);
@@ -888,7 +922,7 @@ class ExtensionsModel extends BaseModel {
 
         $ids = array();
         $factory = new KazistFactory();
-       
+
         foreach ($emails as $key => $email) {
 
             $parameter_arr = array('extension_path' => $namespace_rewrite, 'system_tracking_id' => $email->tracking_id);
@@ -937,25 +971,23 @@ class ExtensionsModel extends BaseModel {
     }
 
     public function updateRoute($route_path, $namespace_path) {
-        
+
         $ids = array();
         $factory = new KazistFactory();
 
-         $all_route = json_decode(file_get_contents($route_path), true);
-         
-$back_routes=(count($all_route['backend']))?$all_route['backend']:array();
-$front_routes=(count($all_route['frontend']))?$all_route['frontend']:array();
-  $routes = array_merge($front_routes,$back_routes);
+        $all_route = json_decode(file_get_contents($route_path), true);
 
-    
+        $back_routes = (count($all_route['backend'])) ? $all_route['backend'] : array();
+        $front_routes = (count($all_route['frontend'])) ? $all_route['frontend'] : array();
+        $routes = array_merge($front_routes, $back_routes);
+
+
         foreach ($routes as $key => $route) {
 
             if (!empty($route['roles'])) {
                 $this->updateRouteRole($route['unique_name'], $route['roles']);
             }
         }
-
-        
     }
 
     /** @TODO Remove this function */
