@@ -53,6 +53,7 @@ class ExtensionsModel extends BaseModel {
         $path_slash = str_replace('.', '/', $path);
         $new_path = JPATH_ROOT . 'applications/' . implode('/', $path_arr);
 
+        $setting_path = $new_path . '/setting.json';
         $menu_path = $new_path . '/menu.json';
         $manifest_path = $new_path . '/manifest.json';
         $namespace_path = $new_path . '/namespace.json';
@@ -69,14 +70,14 @@ class ExtensionsModel extends BaseModel {
             case 'prepare':
                 $this->prepareTables();
                 break;
-            case 'menu':
-                if (file_exists($menu_path)) {
-                    $this->installMenu($new_path, $path, $menu_path);
-                }
-                break;
             case 'manifest':
                 if (file_exists($manifest_path)) {
                     $this->installManifest($new_path, $path, $manifest_path);
+                }
+                break;
+            case 'setting':
+                if (file_exists($setting_path)) {
+                    $this->installSetting($new_path, $path, $setting_path);
                 }
                 break;
             case 'namespace':
@@ -136,7 +137,7 @@ class ExtensionsModel extends BaseModel {
         $namespace_path = $new_path . '/namespace.json';
 
         $urls[] = WEB_BASE . '/admin/system-install/' . $path . '/prepare' . '?' . $uniqid;
-        //$urls[] = WEB_BASE . '/admin/system-install/' . $path . '/menu' . '?' . $uniqid;
+        $urls[] = WEB_BASE . '/admin/system-install/' . $path . '/setting' . '?' . $uniqid;
         // $urls[] = WEB_BASE . '/admin/system-install/' . $path . '/manifest' . '?' . $uniqid;
 
         $namespaces = json_decode(file_get_contents($namespace_path));
@@ -487,10 +488,8 @@ class ExtensionsModel extends BaseModel {
         $files['data'] = $file_path . 'data.json';
         $files['email'] = $file_path . 'email.json';
         $files['language'] = $file_path . 'language.json';
-        $files['setting'] = $file_path . 'setting.json';
         $files['search'] = $file_path . 'search.json';
         $files['flexview'] = $file_path . 'flexview.json';
-        $files['route'] = $file_path . 'route.json';
 
         $namespace_path = trim(str_replace('\\', '/', $namespace_rewrite), '/');
         $namespace_path = ($namespace_path != '') ? $namespace_path : 'EMPTY';
@@ -511,16 +510,8 @@ class ExtensionsModel extends BaseModel {
             $this->updateLanguage($files['language'], $namespace_path);
         }
 
-        if (file_exists($files['setting'])) {
-            $this->updateSetting($files['setting'], $namespace_path);
-        }
-
         if (file_exists($files['flexview'])) {
             $this->updateFlexview($files['flexview'], $namespace_path);
-        }
-
-        if (file_exists($files['route'])) {
-            $this->updateRoute($files['route'], $namespace_path);
         }
     }
 
@@ -557,7 +548,7 @@ class ExtensionsModel extends BaseModel {
 
         if (count($datas) < $this->limit || $this->offset || $is_paged) {
 
-            $start = (int)$this->offset;
+            $start = (int) $this->offset;
             $end = $this->offset + $this->limit;
             $end = ($end > count($datas)) ? count($datas) : $end;
 
@@ -1025,33 +1016,38 @@ class ExtensionsModel extends BaseModel {
         }
     }
 
-    public function updateSetting($setting_path, $namespace_rewrite) {
+    public function installSetting($new_path, $path, $setting_path) {
+
+
 
         $ids = array();
         $factory = new KazistFactory();
 
         $settings = json_decode(file_get_contents($setting_path), true);
 
-        foreach ($settings as $key => $setting) {
+        foreach ($settings['groups'] as $key => $group) {
+            foreach ($group['settings'] as $key => $setting) {
 
-            $parameter_arr = array('name' => $key);
-            $where_arr = array('ss.name=:name');
-            $setting_data = $factory->getRecord('#__system_settings', 'ss', $where_arr, $parameter_arr);
+                $parameter_arr = array('name' => $setting['name']);
+                $where_arr = array('ss.name=:name');
+                $setting_data = $factory->getRecord('#__system_settings', 'ss', $where_arr, $parameter_arr);
 
-            if (!isset($setting_data->is_modified) || !$setting_data->is_modified) {
+                if (!isset($setting_data->is_modified) || !$setting_data->is_modified) {
 
-                $setting['id'] = $setting_data->id;
-                $setting['name'] = $setting['name'];
-                $setting['value'] = $setting['default'];
-                $setting['extension_path'] = $namespace_rewrite;
-                $setting['is_modified'] = 0;
-                $setting['subset_id'] = $this->subset_id;
+                    $setting['id'] = $setting_data->id;
+                    $setting['name'] = $setting['name'];
+                    $setting['value'] = $setting['default'];
+                    $setting['extension_path'] = $path;
+                    $setting['is_modified'] = 0;
+                    $setting['subset_id'] = $this->subset_id;
 
-                $ids[] = $factory->saveRecord('#__system_settings', $setting);
+                    $ids[] = $factory->saveRecord('#__system_settings', $setting);
+                }
             }
         }
+
         if (!empty($ids)) {
-            $parameter_arr = array('extension_path' => $namespace_rewrite);
+            $parameter_arr = array('extension_path' => $path);
             $where_arr = array('id NOT IN (' . implode(',', $ids) . ')', 'extension_path = :extension_path OR extension_path IS NULL', 'is_modified=0');
             $factory->deleteRecords('#__system_settings', $where_arr, $parameter_arr);
         }

@@ -140,6 +140,8 @@ class SettingsModel extends BaseModel {
                 $record->value = $item;
             }
 
+            $record->is_modified = 1;
+
             $this->saveRecord('#__system_settings', $record);
         }
     }
