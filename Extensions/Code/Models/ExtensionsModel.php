@@ -1042,6 +1042,8 @@ class ExtensionsModel extends BaseModel {
                     $setting['subset_id'] = $this->subset_id;
 
                     $ids[] = $factory->saveRecord('#__system_settings', $setting);
+                }else{
+                     $ids[] = $setting_data->id;
                 }
             }
         }
