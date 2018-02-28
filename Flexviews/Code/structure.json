@@ -290,19 +290,19 @@
             "name": "suffix_prefix",
             "title": "Suffix Prefix",
             "type": "module",
-            "description": "undefined"
+            "description": ""
         },
         {
             "name": "flexview_position",
             "title": "Positions",
             "type": "module",
-            "description": "undefined"
+            "description": ""
         },
         {
             "name": "flexview_controller",
             "title": "Controller",
             "type": "module",
-            "description": "undefined"
+            "description": ""
         }
     ],
     "fields": [
